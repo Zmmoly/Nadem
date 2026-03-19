@@ -506,6 +506,12 @@ footer {
 }
 
 /* ===== REVEAL ===== */
+/* Hero elements — تظهر فوراً */
+.hero-text, .hero-visual {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -741,7 +747,15 @@ footer {
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Reveal on scroll
+// Hero — تظهر فوراً عند تحميل الصفحة
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hero-text, .hero-visual, .stats-bar .stat').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+});
+
+// Reveal on scroll للأقسام الأخرى
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -749,7 +763,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.05 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Formspree submit
