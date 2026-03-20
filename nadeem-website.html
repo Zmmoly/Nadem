@@ -17,512 +17,79 @@
   --text-muted: rgba(240,235,224,0.5);
   --border: rgba(201,168,76,0.15);
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Tajawal', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-}
-
-/* ===== NAV ===== */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 999;
-  padding: 18px 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(18,18,18,0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-  font-family: 'Amiri', serif;
-  font-size: 1.7rem;
-  color: var(--gold);
-}
-
-.nav-links {
-  display: flex;
-  gap: 36px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
+body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+nav { position: fixed; top: 0; width: 100%; z-index: 999; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(18,18,18,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Amiri', serif; font-size: 1.7rem; color: var(--gold); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: var(--gold); }
-
-/* ===== HERO ===== */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 60px;
-  padding: 120px 80px 80px;
-  background:
-    radial-gradient(ellipse 70% 60% at 30% 50%, rgba(201,168,76,0.05), transparent 70%),
-    linear-gradient(160deg, #181818 0%, #121212 100%);
-  border-bottom: 1px solid var(--border);
-}
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--gold);
-  font-size: 0.8rem;
-  letter-spacing: 3px;
-  font-weight: 600;
-  margin-bottom: 28px;
-}
-
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; padding: 120px 80px 80px; background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(201,168,76,0.05), transparent 70%), linear-gradient(160deg, #181818 0%, #121212 100%); border-bottom: 1px solid var(--border); }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; font-weight: 600; margin-bottom: 28px; }
 .hero-eyebrow::before, .hero-eyebrow::after { content: '✦'; font-size: 0.6rem; }
-
-.hero-ayah {
-  font-family: 'Amiri', serif;
-  font-size: 1.6rem;
-  color: var(--gold-light);
-  line-height: 2;
-  margin-bottom: 6px;
-}
-
-.hero-ayah-ref {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-  margin-bottom: 36px;
-}
-
-h1 {
-  font-family: 'Amiri', serif;
-  font-size: clamp(3.5rem, 8vw, 6rem);
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 20px;
-  text-shadow: 0 0 60px rgba(201,168,76,0.2);
-}
-
-.hero-desc {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  line-height: 1.9;
-  font-weight: 300;
-  margin-bottom: 44px;
-  max-width: 420px;
-}
-
-.hero-btns {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.btn-gold {
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: #1A1000;
-  padding: 15px 36px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.95rem;
-  transition: all 0.3s;
-  box-shadow: 0 8px 24px rgba(201,168,76,0.25);
-}
-
-.btn-gold:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(201,168,76,0.35);
-}
-
-.btn-outline {
-  border: 1px solid rgba(201,168,76,0.35);
-  color: var(--gold-light);
-  padding: 15px 36px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: all 0.3s;
-}
-
-.btn-outline:hover {
-  background: rgba(201,168,76,0.08);
-  border-color: var(--gold);
-}
-
-/* Phone */
-.hero-visual {
-  display: flex;
-  justify-content: center;
-}
-
-.phone-wrap {
-  position: relative;
-  width: 260px;
-}
-
-.phone-glow {
-  position: absolute;
-  inset: -40px;
-  background: radial-gradient(ellipse, rgba(201,168,76,0.1), transparent 70%);
-  border-radius: 50%;
-  z-index: 0;
-}
-
-.phone-frame {
-  position: relative;
-  z-index: 1;
-  border-radius: 38px;
-  overflow: hidden;
-  border: 2px solid rgba(201,168,76,0.25);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 40px rgba(201,168,76,0.06);
-}
-
-.phone-frame img {
-  width: 100%;
-  display: block;
-}
-
-/* ===== GOLD DIVIDER ===== */
-.gold-line {
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-}
-
-/* ===== STATS BAR ===== */
-.stats-bar {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 28px 80px;
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-}
-
-.stat {
-  text-align: center;
-}
-
-.stat-num {
-  font-family: 'Amiri', serif;
-  font-size: 2rem;
-  color: var(--gold);
-  font-weight: 700;
-  display: block;
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-}
-
-/* ===== FEATURES ===== */
-.features {
-  padding: 100px 80px;
-  background: var(--bg2);
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 64px;
-}
-
-.section-tag {
-  display: inline-block;
-  background: rgba(201,168,76,0.1);
-  border: 1px solid rgba(201,168,76,0.2);
-  color: var(--gold);
-  padding: 5px 18px;
-  border-radius: 100px;
-  font-size: 0.78rem;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.section-title {
-  font-family: 'Amiri', serif;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  color: var(--text);
-  margin-bottom: 14px;
-}
-
-.section-sub {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  max-width: 480px;
-  margin: 0 auto;
-  line-height: 1.8;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.feat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 36px 28px;
-  transition: all 0.4s;
-}
-
-.feat-card:hover {
-  border-color: rgba(201,168,76,0.4);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-}
-
-.feat-icon {
-  font-size: 2.2rem;
-  margin-bottom: 18px;
-  display: block;
-}
-
-.feat-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  margin-bottom: 10px;
-}
-
-.feat-desc {
-  color: var(--text-muted);
-  font-size: 0.88rem;
-  line-height: 1.8;
-  font-weight: 300;
-}
-
-/* ===== SCREENSHOTS ===== */
-.screenshots {
-  padding: 100px 80px;
-  background: var(--bg);
-}
-
-.screens-showcase {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
-  align-items: flex-end;
-  margin-top: 64px;
-  flex-wrap: wrap;
-}
-
-.screen-item {
-  flex: 1;
-  min-width: 200px;
-  max-width: 260px;
-  text-align: center;
-}
-
+.hero-ayah { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold-light); line-height: 2; margin-bottom: 6px; }
+.hero-ayah-ref { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 36px; }
+h1 { font-family: 'Amiri', serif; font-size: clamp(3.5rem, 8vw, 6rem); color: var(--gold); line-height: 1; margin-bottom: 20px; text-shadow: 0 0 60px rgba(201,168,76,0.2); }
+.hero-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; font-weight: 300; margin-bottom: 44px; max-width: 420px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #1A1000; padding: 15px 36px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s; box-shadow: 0 8px 24px rgba(201,168,76,0.25); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,168,76,0.35); }
+.btn-outline { border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light); padding: 15px 36px; border-radius: 50px; text-decoration: none; font-size: 0.95rem; transition: all 0.3s; }
+.btn-outline:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+.hero-visual { display: flex; justify-content: center; }
+.phone-wrap { position: relative; width: 260px; }
+.phone-glow { position: absolute; inset: -40px; background: radial-gradient(ellipse, rgba(201,168,76,0.1), transparent 70%); border-radius: 50%; z-index: 0; }
+.phone-frame { position: relative; z-index: 1; border-radius: 38px; overflow: hidden; border: 2px solid rgba(201,168,76,0.25); box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 40px rgba(201,168,76,0.06); }
+.phone-frame img { width: 100%; display: block; }
+.gold-line { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+.stats-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 80px; display: flex; justify-content: center; gap: 80px; }
+.stat { text-align: center; }
+.stat-num { font-family: 'Amiri', serif; font-size: 2rem; color: var(--gold); font-weight: 700; display: block; }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; }
+.features { padding: 100px 80px; background: var(--bg2); }
+.section-header { text-align: center; margin-bottom: 64px; }
+.section-tag { display: inline-block; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); padding: 5px 18px; border-radius: 100px; font-size: 0.78rem; letter-spacing: 2px; margin-bottom: 20px; font-weight: 600; }
+.section-title { font-family: 'Amiri', serif; font-size: clamp(2rem, 4vw, 2.8rem); color: var(--text); margin-bottom: 14px; }
+.section-sub { color: var(--text-muted); font-size: 0.95rem; max-width: 480px; margin: 0 auto; line-height: 1.8; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+.feat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 36px 28px; transition: all 0.4s; }
+.feat-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.feat-icon { font-size: 2.2rem; margin-bottom: 18px; display: block; }
+.feat-title { font-size: 1.05rem; font-weight: 700; color: var(--gold-light); margin-bottom: 10px; }
+.feat-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.8; font-weight: 300; }
+.screenshots { padding: 100px 80px; background: var(--bg); }
+.screens-showcase { display: flex; gap: 32px; justify-content: center; align-items: flex-end; margin-top: 64px; flex-wrap: wrap; }
+.screen-item { flex: 1; min-width: 200px; max-width: 260px; text-align: center; }
 .screen-item.featured { transform: scale(1.07); }
-
-.screen-frame {
-  border-radius: 30px;
-  overflow: hidden;
-  border: 1.5px solid rgba(201,168,76,0.2);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-  transition: all 0.4s;
-  background: #1A1A1A;
-}
-
-.screen-frame:hover {
-  border-color: rgba(201,168,76,0.5);
-  transform: translateY(-8px);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-}
-
-.screen-frame img {
-  width: 100%;
-  display: block;
-}
-
-.screen-label {
-  margin-top: 20px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-
-.screen-label strong {
-  display: block;
-  color: var(--gold-light);
-  font-size: 0.95rem;
-  margin-bottom: 4px;
-}
-
-/* ===== CONTACT ===== */
-.contact {
-  padding: 100px 80px;
-  background: var(--bg2);
-}
-
-.contact-inner {
-  max-width: 580px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.contact-form {
-  margin-top: 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  text-align: right;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.form-group label {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.form-group input,
-.form-group textarea {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 13px 16px;
-  color: var(--text);
-  font-family: 'Tajawal', sans-serif;
-  font-size: 0.92rem;
-  transition: border-color 0.3s;
-  resize: none;
-  outline: none;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: rgba(201,168,76,0.5);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: rgba(240,235,224,0.2);
-}
-
-.btn-submit {
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: #1A1000;
-  padding: 16px;
-  border-radius: 12px;
-  border: none;
-  font-family: 'Tajawal', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 8px 24px rgba(201,168,76,0.2);
-}
-
-.btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(201,168,76,0.3);
-}
-
+.screen-frame { border-radius: 30px; overflow: hidden; border: 1.5px solid rgba(201,168,76,0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: all 0.4s; background: #1A1A1A; }
+.screen-frame:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-8px); box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
+.screen-frame img { width: 100%; display: block; }
+.screen-label { margin-top: 20px; font-size: 0.82rem; color: var(--text-muted); }
+.screen-label strong { display: block; color: var(--gold-light); font-size: 0.95rem; margin-bottom: 4px; }
+.contact { padding: 100px 80px; background: var(--bg2); }
+.contact-inner { max-width: 580px; margin: 0 auto; text-align: center; }
+.contact-form { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; text-align: right; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.form-group input, .form-group textarea { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; color: var(--text); font-family: 'Tajawal', sans-serif; font-size: 0.92rem; transition: border-color 0.3s; resize: none; outline: none; }
+.form-group input:focus, .form-group textarea:focus { border-color: rgba(201,168,76,0.5); }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(240,235,224,0.2); }
+.btn-submit { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #1A1000; padding: 16px; border-radius: 12px; border: none; font-family: 'Tajawal', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 24px rgba(201,168,76,0.2); }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,168,76,0.3); }
 .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-
-.contact-email {
-  margin-top: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.contact-email a {
-  color: var(--gold);
-  text-decoration: none;
-}
-
-/* ===== FOOTER ===== */
-footer {
-  padding: 40px 80px;
-  background: #0D0D0D;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-logo {
-  font-family: 'Amiri', serif;
-  font-size: 1.4rem;
-  color: var(--gold);
-}
-
-.footer-links {
-  display: flex;
-  gap: 28px;
-  list-style: none;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.82rem;
-  transition: color 0.3s;
-}
-
+.contact-email { margin-top: 32px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
+.contact-email a { color: var(--gold); text-decoration: none; }
+footer { padding: 40px 80px; background: #0D0D0D; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--gold); }
+.footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.82rem; transition: color 0.3s; }
 .footer-links a:hover { color: var(--gold); }
-
-.footer-copy {
-  color: rgba(240,235,224,0.2);
-  font-size: 0.78rem;
-}
-
-/* ===== REVEAL ===== */
-/* Hero elements — تظهر فوراً */
-.hero-text, .hero-visual {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* ===== RESPONSIVE ===== */
+.footer-copy { color: rgba(240,235,224,0.2); font-size: 0.78rem; }
+.hero-text, .hero-visual { opacity: 1 !important; transform: none !important; }
+.reveal { opacity: 1; transform: none; }
+.reveal.visible { opacity: 1; transform: none; }
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none; }
@@ -541,7 +108,6 @@ footer {
   .form-row { grid-template-columns: 1fr; }
   footer { padding: 32px 28px; justify-content: center; text-align: center; }
 }
-
 @media (max-width: 600px) {
   .features-grid { grid-template-columns: 1fr; }
   .screen-item { max-width: 100%; }
@@ -549,8 +115,6 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
   <div class="nav-logo">نديم</div>
   <ul class="nav-links">
@@ -561,7 +125,6 @@ footer {
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-text">
     <div class="hero-eyebrow">تطبيق تسميع القرآن الكريم</div>
@@ -570,7 +133,7 @@ footer {
     <h1>نديم</h1>
     <p class="hero-desc">رفيقك الذكي في مراجعة وحفظ القرآن الكريم — يستمع لتلاوتك ويصحّح أخطاءك فوراً بتقنية الذكاء الاصطناعي.</p>
     <div class="hero-btns">
-      <a href="#contact" class="btn-gold">حمّل التطبيق</a>
+      <a href="https://github.com/Zmmoly/Nadem/releases/download/v1.0.0/app-release.apk" class="btn-gold" download>⬇️ حمّل التطبيق</a>
       <a href="#features" class="btn-outline">اكتشف المميزات</a>
     </div>
   </div>
@@ -584,154 +147,68 @@ footer {
   </div>
 </section>
 
-<!-- STATS -->
 <div class="stats-bar">
-  <div class="stat">
-    <span class="stat-num">١١٤</span>
-    <span class="stat-label">سورة</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">٦٠٤</span>
-    <span class="stat-label">صفحة</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">٣</span>
-    <span class="stat-label">أوضاع تسميع</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">٦٢٣٦</span>
-    <span class="stat-label">آية</span>
-  </div>
+  <div class="stat"><span class="stat-num">١١٤</span><span class="stat-label">سورة</span></div>
+  <div class="stat"><span class="stat-num">٦٠٤</span><span class="stat-label">صفحة</span></div>
+  <div class="stat"><span class="stat-num">٣</span><span class="stat-label">أوضاع تسميع</span></div>
+  <div class="stat"><span class="stat-num">٦٢٣٦</span><span class="stat-label">آية</span></div>
 </div>
 
 <div class="gold-line"></div>
 
-<!-- FEATURES -->
 <section class="features" id="features">
   <div class="section-header">
     <div class="section-tag reveal">✦ المميزات</div>
     <h2 class="section-title reveal">كل ما تحتاجه لمراجعة حفظك</h2>
     <p class="section-sub reveal">أدوات ذكية صُممت لمساعدتك على إتقان حفظ القرآن الكريم</p>
   </div>
-
   <div class="features-grid">
-    <div class="feat-card reveal">
-      <span class="feat-icon">📖</span>
-      <h3 class="feat-title">قراءة كاملة للمصحف</h3>
-      <p class="feat-desc">اقرأ القرآن الكريم كاملاً بخط عثماني أصيل — ١١٤ سورة و٦٠٤ صفحة بتصفح سلس وجميل.</p>
-    </div>
-    <div class="feat-card reveal">
-      <span class="feat-icon">🎤</span>
-      <h3 class="feat-title">تسميع بالذكاء الاصطناعي</h3>
-      <p class="feat-desc">تكلّم والتطبيق يصحح فوراً — الكلمات الصحيحة باللون الأخضر والأخطاء باللون الأحمر لحظةً بلحظة.</p>
-    </div>
-    <div class="feat-card reveal">
-      <span class="feat-icon">🧠</span>
-      <h3 class="feat-title">وضع الاختبار الذكي</h3>
-      <p class="feat-desc">يختار آيةً عشوائية ويشغّل صوتها ثم يطلب منك المتابعة — اختبر نفسك في أي جزء تريده.</p>
-    </div>
-    <div class="feat-card reveal">
-      <span class="feat-icon">💡</span>
-      <h3 class="feat-title">نظام التلميح</h3>
-      <p class="feat-desc">نسيت الآية التالية؟ اضغط تلميحاً ويكشف لك الكلمات العشر التالية دون مغادرة وضع التسميع.</p>
-    </div>
-    <div class="feat-card reveal">
-      <span class="feat-icon">📊</span>
-      <h3 class="feat-title">تقييم فوري بالنسبة المئوية</h3>
-      <p class="feat-desc">بعد كل جلسة تحصل على درجة مئوية دقيقة تعكس جودة حفظك وتساعدك على التطور.</p>
-    </div>
-    <div class="feat-card reveal">
-      <span class="feat-icon">⭐</span>
-      <h3 class="feat-title">المفضلة وآخر قراءة</h3>
-      <p class="feat-desc">احفظ السور المفضلة وتتبّع آخر ما قرأت — يتذكر التطبيق مكانك دائماً.</p>
-    </div>
+    <div class="feat-card reveal"><span class="feat-icon">📖</span><h3 class="feat-title">قراءة كاملة للمصحف</h3><p class="feat-desc">اقرأ القرآن الكريم كاملاً بخط عثماني أصيل — ١١٤ سورة و٦٠٤ صفحة بتصفح سلس وجميل.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">🎤</span><h3 class="feat-title">تسميع بالذكاء الاصطناعي</h3><p class="feat-desc">تكلّم والتطبيق يصحح فوراً — الكلمات الصحيحة باللون الأخضر والأخطاء باللون الأحمر لحظةً بلحظة.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">🧠</span><h3 class="feat-title">وضع الاختبار الذكي</h3><p class="feat-desc">يختار آيةً عشوائية ويشغّل صوتها ثم يطلب منك المتابعة — اختبر نفسك في أي جزء تريده.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">💡</span><h3 class="feat-title">نظام التلميح</h3><p class="feat-desc">نسيت الآية التالية؟ اضغط تلميحاً ويكشف لك الكلمات العشر التالية دون مغادرة وضع التسميع.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">📊</span><h3 class="feat-title">تقييم فوري بالنسبة المئوية</h3><p class="feat-desc">بعد كل جلسة تحصل على درجة مئوية دقيقة تعكس جودة حفظك وتساعدك على التطور.</p></div>
+    <div class="feat-card reveal"><span class="feat-icon">⭐</span><h3 class="feat-title">المفضلة وآخر قراءة</h3><p class="feat-desc">احفظ السور المفضلة وتتبّع آخر ما قرأت — يتذكر التطبيق مكانك دائماً.</p></div>
   </div>
 </section>
 
 <div class="gold-line"></div>
 
-<!-- SCREENSHOTS -->
 <section class="screenshots" id="screenshots">
   <div class="section-header">
     <div class="section-tag reveal">✦ لقطات الشاشة</div>
     <h2 class="section-title reveal">شاهد نديم من الداخل</h2>
     <p class="section-sub reveal">واجهة أنيقة وسهلة الاستخدام صُممت بعناية لتجربة قرآنية فريدة</p>
   </div>
-
   <div class="screens-showcase">
-    <div class="screen-item reveal">
-      <div class="screen-frame">
-        <img src="screen-read.jpg" alt="وضع القراءة" loading="lazy">
-      </div>
-      <div class="screen-label">
-        <strong>وضع القراءة</strong>
-        نص قرآني بخط عثماني أصيل
-      </div>
-    </div>
-
-    <div class="screen-item featured reveal">
-      <div class="screen-frame">
-        <img src="screen-home.jpg" alt="الشاشة الرئيسية" loading="lazy">
-      </div>
-      <div class="screen-label">
-        <strong>الشاشة الرئيسية</strong>
-        قائمة السور الكاملة
-      </div>
-    </div>
-
-    <div class="screen-item reveal">
-      <div class="screen-frame">
-        <img src="screen-exam.jpg" alt="وضع الاختبار" loading="lazy">
-      </div>
-      <div class="screen-label">
-        <strong>وضع الاختبار</strong>
-        اختبر نفسك في أي نطاق
-      </div>
-    </div>
+    <div class="screen-item reveal"><div class="screen-frame"><img src="screen-read.jpg" alt="وضع القراءة" loading="lazy"></div><div class="screen-label"><strong>وضع القراءة</strong>نص قرآني بخط عثماني أصيل</div></div>
+    <div class="screen-item featured reveal"><div class="screen-frame"><img src="screen-home.jpg" alt="الشاشة الرئيسية" loading="lazy"></div><div class="screen-label"><strong>الشاشة الرئيسية</strong>قائمة السور الكاملة</div></div>
+    <div class="screen-item reveal"><div class="screen-frame"><img src="screen-exam.jpg" alt="وضع الاختبار" loading="lazy"></div><div class="screen-label"><strong>وضع الاختبار</strong>اختبر نفسك في أي نطاق</div></div>
   </div>
 </section>
 
 <div class="gold-line"></div>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="section-tag reveal">✦ تواصل معنا</div>
     <h2 class="section-title reveal">نسعد بسماعك</h2>
     <p class="section-sub reveal">لأي استفسار أو اقتراح أو مشكلة تقنية — فريقنا هنا للمساعدة</p>
-
     <form class="contact-form reveal" action="https://formspree.io/f/mjgajlgb" method="POST" onsubmit="handleSubmit(event)">
       <input type="hidden" name="_language" value="ar">
       <input type="hidden" name="_subject" value="رسالة جديدة من موقع نديم">
       <div class="form-row">
-        <div class="form-group">
-          <label>الاسم</label>
-          <input type="text" name="name" placeholder="اسمك الكريم" required>
-        </div>
-        <div class="form-group">
-          <label>البريد الإلكتروني</label>
-          <input type="email" name="email" placeholder="email@example.com" required>
-        </div>
+        <div class="form-group"><label>الاسم</label><input type="text" name="name" placeholder="اسمك الكريم" required></div>
+        <div class="form-group"><label>البريد الإلكتروني</label><input type="email" name="email" placeholder="email@example.com" required></div>
       </div>
-      <div class="form-group">
-        <label>الموضوع</label>
-        <input type="text" name="subject" placeholder="موضوع رسالتك" required>
-      </div>
-      <div class="form-group">
-        <label>الرسالة</label>
-        <textarea rows="5" name="message" placeholder="اكتب رسالتك هنا..." required></textarea>
-      </div>
+      <div class="form-group"><label>الموضوع</label><input type="text" name="subject" placeholder="موضوع رسالتك" required></div>
+      <div class="form-group"><label>الرسالة</label><textarea rows="5" name="message" placeholder="اكتب رسالتك هنا..." required></textarea></div>
       <button type="submit" class="btn-submit" id="submitBtn">إرسال الرسالة ✦</button>
     </form>
-
-    <div class="contact-email reveal">
-      <span>✉</span>
-      <a href="/cdn-cgi/l/email-protection#7e0413131112073e19131f1712501d1113"><span class="__cf_email__" data-cfemail="73091e1e1c1f0a33141e121a1f5d101c1e">[email&#160;protected]</span></a>
-    </div>
+    <div class="contact-email reveal"><span>✉</span><a href="mailto:nadeem@example.com">nadeem@example.com</a></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">نديم ✦</div>
   <ul class="footer-links">
@@ -745,16 +222,13 @@ footer {
   <p class="footer-copy">© 2026 نديم — جميع الحقوق محفوظة</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Hero — تظهر فوراً عند تحميل الصفحة
+<script>
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.hero-text, .hero-visual, .stats-bar .stat').forEach(el => {
     el.style.opacity = '1';
     el.style.transform = 'none';
   });
 });
-
-// Reveal on scroll للأقسام الأخرى
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -765,7 +239,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.05 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Formspree submit
 async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -773,23 +246,16 @@ async function handleSubmit(e) {
   btn.textContent = '⏳ جاري الإرسال...';
   btn.disabled = true;
   try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
+    const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
     if (res.ok) {
       btn.textContent = '✅ تم الإرسال بنجاح!';
       btn.style.background = 'linear-gradient(135deg, #2D5A27, #1A3D16)';
       btn.style.color = '#fff';
       form.reset();
-      setTimeout(() => {
-        btn.textContent = 'إرسال الرسالة ✦';
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.disabled = false;
-      }, 5000);
+      setTimeout(() => { btn.textContent = 'إرسال الرسالة ✦'; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 5000);
     } else { throw new Error(); }
-  } catch {
-    btn.textContent = '❌ فشل الإرسال، حاول مرة أخرى';
-    btn.style.background = 'linear-gradient(135deg
+  } catch { btn.textContent = '❌ فشل الإرسال، حاول مرة أخرى'; btn.disabled = false; }
+}
+</script>
+</body>
+</html>
