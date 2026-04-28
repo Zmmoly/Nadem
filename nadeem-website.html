@@ -4,16 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نديم — رفيقك في حفظ القرآن الكريم</title>
-
-<!-- ====== SEO الأساسي ====== -->
 <meta name="description" content="نديم — تطبيق ذكي لمراجعة وحفظ القرآن الكريم. يستمع لتلاوتك ويصحّح أخطاءك فوراً بتقنية الذكاء الاصطناعي. ١١٤ سورة، ٦٠٤ صفحة، ٣ أوضاع تسميع.">
 <meta name="keywords" content="نديم، حفظ القرآن، تسميع القرآن، تطبيق قرآن، ذكاء اصطناعي، مراجعة القرآن، تلاوة، مصحف">
 <meta name="author" content="نديم">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#C9A84C">
 <link rel="canonical" href="https://zmmoly.github.io/Nadem/nadeem-website.html">
-
-<!-- ====== Open Graph ====== -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zmmoly.github.io/Nadem/nadeem-website.html">
 <meta property="og:title" content="نديم — رفيقك في حفظ القرآن الكريم">
@@ -24,25 +20,19 @@
 <meta property="og:image:alt" content="تطبيق نديم لحفظ القرآن الكريم">
 <meta property="og:site_name" content="نديم">
 <meta property="og:locale" content="ar_AR">
-
-<!-- ====== Twitter Card ====== -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://zmmoly.github.io/Nadem/nadeem-website.html">
 <meta name="twitter:title" content="نديم — رفيقك في حفظ القرآن الكريم">
 <meta name="twitter:description" content="تطبيق ذكي يستمع لتلاوتك ويصحّح أخطاءك فوراً بالذكاء الاصطناعي.">
 <meta name="twitter:image" content="https://zmmoly.github.io/Nadem/screen-home.jpg">
 <meta name="twitter:image:alt" content="تطبيق نديم لحفظ القرآن الكريم">
-
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="نديم">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://formspree.io">
-
-<!-- Schema.org -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,7 +48,6 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
-
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -92,11 +81,69 @@ h1 { font-family: 'Amiri', serif; font-size: clamp(3.5rem, 8vw, 6rem); color: va
 .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,168,76,0.35); }
 .btn-outline { border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light); padding: 15px 36px; border-radius: 50px; text-decoration: none; font-size: 0.95rem; transition: all 0.3s; }
 .btn-outline:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
-.hero-visual { display: flex; justify-content: center; }
-.phone-wrap { position: relative; width: 260px; }
-.phone-glow { position: absolute; inset: -40px; background: radial-gradient(ellipse, rgba(201,168,76,0.1), transparent 70%); border-radius: 50%; z-index: 0; }
-.phone-frame { position: relative; z-index: 1; border-radius: 38px; overflow: hidden; border: 2px solid rgba(201,168,76,0.25); box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 40px rgba(201,168,76,0.06); }
-.phone-frame img { width: 100%; display: block; }
+
+/* بطاقة التبرع في الـ Hero */
+.hero-visual { display: flex; justify-content: center; align-items: center; }
+.hero-donate-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 28px;
+  padding: 44px 36px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 50px rgba(201,168,76,0.07);
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s;
+}
+.hero-donate-card:hover {
+  border-color: rgba(201,168,76,0.55);
+  box-shadow: 0 50px 100px rgba(0,0,0,0.7), 0 0 60px rgba(201,168,76,0.1);
+  transform: translateY(-6px);
+}
+.hero-donate-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.hero-donate-card::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 280px; height: 280px;
+  background: radial-gradient(ellipse, rgba(201,168,76,0.07), transparent 70%);
+  pointer-events: none;
+}
+.hd-icon { font-size: 3rem; margin-bottom: 16px; display: block; position: relative; z-index: 1; }
+.hd-title { font-family: 'Amiri', serif; font-size: 1.7rem; color: var(--gold-light); margin-bottom: 12px; position: relative; z-index: 1; }
+.hd-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.85; font-weight: 300; margin-bottom: 28px; position: relative; z-index: 1; }
+.hd-hadith { background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.18); border-radius: 14px; padding: 16px 20px; margin-bottom: 28px; position: relative; z-index: 1; }
+.hd-hadith p { font-family: 'Amiri', serif; font-size: 1rem; color: var(--gold-light); line-height: 2; }
+.hd-hadith span { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; letter-spacing: 1px; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+.hd-note { margin-top: 14px; font-size: 0.74rem; color: var(--text-muted); position: relative; z-index: 1; }
+
+/* أزرار الدفع */
+.donate-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; margin-bottom: 4px; }
+.pay-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 18px; text-decoration: none; font-family: 'Tajawal', sans-serif; transition: all 0.3s; min-width: 130px; padding: 16px 20px; cursor: pointer; }
+
+/* زر فيزا */
+.pay-btn-visa { background: #1A1F71; border: 2px solid rgba(255,255,255,0.15); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.pay-btn-visa:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(26,31,113,0.6); border-color: rgba(255,255,255,0.3); }
+.visa-logo { display: flex; align-items: center; justify-content: center; }
+.visa-logo svg { width: 64px; height: 22px; }
+.pay-btn-visa .pay-label { font-size: 0.72rem; color: rgba(255,255,255,0.55); letter-spacing: 0.5px; }
+
+/* زر بنكك */
+.pay-btn-bankak { background: linear-gradient(135deg, #1B8A4C, #0F5C32); border: 2px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.pay-btn-bankak:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(27,138,76,0.5); border-color: rgba(255,255,255,0.25); }
+.bankak-name { font-size: 1.2rem; font-weight: 900; color: #fff; letter-spacing: 1px; font-family: 'Tajawal', sans-serif; }
+.bankak-number { font-size: 0.82rem; color: rgba(255,255,255,0.75); letter-spacing: 2px; font-weight: 500; direction: ltr; }
+
 .gold-line { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
 .stats-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 80px; display: flex; justify-content: center; gap: 80px; }
 .stat { text-align: center; }
@@ -123,84 +170,25 @@ h1 { font-family: 'Amiri', serif; font-size: clamp(3.5rem, 8vw, 6rem); color: va
 .screen-label { margin-top: 20px; font-size: 0.82rem; color: var(--text-muted); }
 .screen-label strong { display: block; color: var(--gold-light); font-size: 0.95rem; margin-bottom: 4px; }
 
-/* ====== قسم التبرع ====== */
+/* قسم التبرع المستقل */
 .donate { padding: 100px 80px; background: var(--bg); }
 .donate-inner { max-width: 700px; margin: 0 auto; text-align: center; }
-.donate-card {
-  margin-top: 48px;
-  background: var(--surface);
-  border: 1px solid rgba(201,168,76,0.25);
-  border-radius: 24px;
-  padding: 48px 40px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.4s, box-shadow 0.4s;
-}
-.donate-card:hover {
-  border-color: rgba(201,168,76,0.5);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.05);
-}
-.donate-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-}
-.donate-glow {
-  position: absolute;
-  top: -60px; left: 50%;
-  transform: translateX(-50%);
-  width: 300px; height: 300px;
-  background: radial-gradient(ellipse, rgba(201,168,76,0.06), transparent 70%);
-  pointer-events: none;
-}
+.donate-card { margin-top: 48px; background: var(--surface); border: 1px solid rgba(201,168,76,0.25); border-radius: 24px; padding: 48px 40px; position: relative; overflow: hidden; transition: border-color 0.4s, box-shadow 0.4s; }
+.donate-card:hover { border-color: rgba(201,168,76,0.5); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.05); }
+.donate-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+.donate-glow { position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; background: radial-gradient(ellipse, rgba(201,168,76,0.06), transparent 70%); pointer-events: none; }
 .donate-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
 .donate-title { font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--gold-light); margin-bottom: 14px; }
 .donate-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.9; font-weight: 300; margin-bottom: 36px; max-width: 460px; margin-left: auto; margin-right: auto; }
-.donate-hadith {
-  background: rgba(201,168,76,0.06);
-  border: 1px solid rgba(201,168,76,0.15);
-  border-radius: 14px;
-  padding: 18px 24px;
-  margin-bottom: 36px;
-}
+.donate-hadith { background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: 14px; padding: 18px 24px; margin-bottom: 36px; }
 .donate-hadith p { font-family: 'Amiri', serif; font-size: 1.05rem; color: var(--gold-light); line-height: 2; }
 .donate-hadith span { display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; letter-spacing: 1px; }
-.btn-donate {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: #1A1000;
-  padding: 16px 44px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  transition: all 0.3s;
-  box-shadow: 0 8px 28px rgba(201,168,76,0.3);
-  font-family: 'Tajawal', sans-serif;
-}
-.btn-donate:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(201,168,76,0.4);
-}
-.btn-donate .heart {
-  font-size: 1.1rem;
-  animation: pulse 1.6s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.25); }
-}
-.donate-note {
-  margin-top: 20px;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
+.btn-donate { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #1A1000; padding: 16px 44px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.3s; box-shadow: 0 8px 28px rgba(201,168,76,0.3); font-family: 'Tajawal', sans-serif; }
+.btn-donate:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(201,168,76,0.4); }
+.btn-donate .heart { font-size: 1.1rem; animation: pulse 1.6s ease-in-out infinite; }
+.donate-note { margin-top: 20px; font-size: 0.78rem; color: var(--text-muted); }
 
-/* ====== نموذج التواصل ====== */
+/* نموذج التواصل */
 .contact { padding: 100px 80px; background: var(--bg2); }
 .contact-inner { max-width: 580px; margin: 0 auto; text-align: center; }
 .contact-form { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; text-align: right; }
@@ -224,12 +212,13 @@ footer { padding: 40px 80px; background: #0D0D0D; border-top: 1px solid var(--bo
 .hero-text, .hero-visual { opacity: 1 !important; transform: none !important; }
 .reveal { opacity: 1; transform: none; }
 .reveal.visible { opacity: 1; transform: none; }
+
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none; }
   .hero { grid-template-columns: 1fr; padding: 100px 28px 60px; text-align: center; }
   .hero-visual { order: -1; }
-  .phone-wrap { width: 200px; }
+  .hero-donate-card { max-width: 100%; }
   .hero-btns { justify-content: center; }
   .hero-desc { max-width: 100%; }
   .stats-bar { padding: 24px 28px; gap: 32px; flex-wrap: wrap; }
@@ -274,12 +263,34 @@ footer { padding: 40px 80px; background: #0D0D0D; border-top: 1px solid var(--bo
       <a href="#features" class="btn-outline">اكتشف المميزات</a>
     </div>
   </div>
+
+  <!-- بطاقة التبرع بدلاً من صورة الهاتف -->
   <div class="hero-visual">
-    <div class="phone-wrap">
-      <div class="phone-glow"></div>
-      <div class="phone-frame">
-        <img src="screen-home.jpg" alt="الشاشة الرئيسية لتطبيق نديم">
+    <div class="hero-donate-card">
+      <span class="hd-icon">🤲</span>
+      <h3 class="hd-title">تصدّق وادعم المشروع</h3>
+      <p class="hd-desc">نديم تطبيق مجاني تماماً لخدمة القرآن الكريم وأهله. إن وجدت فيه فائدةً فأسهم في استمراره — كل تبرع مهما صغر يُسهم في تطويره وتحسينه.</p>
+      <div class="hd-hadith">
+        <p>مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ</p>
+        <span>رواه مسلم</span>
       </div>
+      <div class="donate-btns">
+        <!-- زر فيزا -->
+        <a href="https://musatafa.gumroad.com/l/fwyajh" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-visa">
+          <div class="visa-logo">
+            <svg viewBox="0 0 80 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="22" font-family="Arial, sans-serif" font-size="26" font-weight="900" font-style="italic" fill="white" letter-spacing="-1">VISA</text>
+            </svg>
+          </div>
+          <span class="pay-label">ادفع بالبطاقة</span>
+        </a>
+        <!-- زر بنكك -->
+        <a href="#" onclick="return false;" class="pay-btn pay-btn-bankak" style="cursor:default;">
+          <span class="bankak-name">بنكك</span>
+          <span class="bankak-number">5152889</span>
+        </a>
+      </div>
+      <p class="hd-note">فيزا: رابط آمن • بنكك: حوّل مباشرة للرقم أعلاه</p>
     </div>
   </div>
 </section>
@@ -326,7 +337,6 @@ footer { padding: 40px 80px; background: #0D0D0D; border-top: 1px solid var(--bo
 
 <div class="gold-line"></div>
 
-<!-- ====== قسم التبرع ====== -->
 <section class="donate" id="donate">
   <div class="donate-inner">
     <div class="section-tag reveal">✦ ادعم المشروع</div>
@@ -336,18 +346,28 @@ footer { padding: 40px 80px; background: #0D0D0D; border-top: 1px solid var(--bo
       <div class="donate-glow"></div>
       <span class="donate-icon">🤲</span>
       <h3 class="donate-title">تصدّق وادعم المشروع</h3>
-      <p class="donate-desc">
-        نديم تطبيق مجاني تماماً لخدمة القرآن الكريم وأهله. إن وجدت فيه فائدةً فأسهم في استمراره — كل تبرع مهما صغر يُسهم في تطويره وتحسينه.
-      </p>
+      <p class="donate-desc">نديم تطبيق مجاني تماماً لخدمة القرآن الكريم وأهله. إن وجدت فيه فائدةً فأسهم في استمراره — كل تبرع مهما صغر يُسهم في تطويره وتحسينه.</p>
       <div class="donate-hadith">
         <p>مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ</p>
         <span>رواه مسلم</span>
       </div>
-      <a href="https://musatafa.gumroad.com/l/fwyajh" target="_blank" rel="noopener noreferrer" class="btn-donate">
-        <span class="heart">❤️</span>
-        تبرع الآن
-      </a>
-      <p class="donate-note">سيُفتح رابط التبرع في نافذة جديدة • آمن ومحمي</p>
+      <div class="donate-btns">
+        <!-- زر فيزا -->
+        <a href="https://musatafa.gumroad.com/l/fwyajh" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-visa">
+          <div class="visa-logo">
+            <svg viewBox="0 0 80 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="22" font-family="Arial, sans-serif" font-size="26" font-weight="900" font-style="italic" fill="white" letter-spacing="-1">VISA</text>
+            </svg>
+          </div>
+          <span class="pay-label">ادفع بالبطاقة</span>
+        </a>
+        <!-- زر بنكك -->
+        <a href="#" onclick="return false;" class="pay-btn pay-btn-bankak" style="cursor:default;">
+          <span class="bankak-name">بنكك</span>
+          <span class="bankak-number">5152889</span>
+        </a>
+      </div>
+      <p class="donate-note">فيزا: رابط آمن • بنكك: حوّل مباشرة للرقم أعلاه</p>
     </div>
   </div>
 </section>
