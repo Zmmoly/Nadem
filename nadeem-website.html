@@ -25,45 +25,107 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-/* ===== LANGUAGE SWITCHER REMOVED ===== */
-.lang-switcher-disabled {
+/* ===== LANGUAGE SWITCHER PILL ===== */
+.lang-pill-wrap {
   position: fixed;
-  top: 50%;
-  left: 16px;
-  transform: translateY(-50%);
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: rgba(18,18,18,0.9);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  padding: 10px 6px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  top: 14px;
+  left: 18px;
+  z-index: 1100;
 }
-.lang-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  background: transparent;
-  cursor: pointer;
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  transition: all 0.3s;
+
+.lang-pill-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 7px;
+  background: rgba(24,24,24,0.92);
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 50px;
+  padding: 7px 14px 7px 10px;
+  cursor: pointer;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+  transition: border-color 0.25s, box-shadow 0.25s;
   font-family: 'Tajawal', sans-serif;
-  letter-spacing: 0;
-  line-height: 1;
-  text-align: center;
+  color: var(--gold-light);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  user-select: none;
+  position: relative;
 }
-.lang-btn:hover { color: var(--gold); border-color: rgba(201,168,76,0.3); }
-.lang-btn.active { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold); }
-.lang-flag { font-size: 1.3rem; line-height: 1; }
+.lang-pill-btn:hover {
+  border-color: rgba(201,168,76,0.6);
+  box-shadow: 0 6px 28px rgba(201,168,76,0.12);
+}
+.lang-pill-btn .pill-flag {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.lang-pill-btn .pill-name {
+  line-height: 1;
+}
+.lang-pill-btn .pill-arrow {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-right: 2px;
+  transition: transform 0.25s;
+  line-height: 1;
+}
+.lang-pill-wrap.open .pill-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: rgba(22,22,22,0.97);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 16px;
+  padding: 6px;
+  min-width: 170px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 30px rgba(201,168,76,0.07);
+  backdrop-filter: blur(24px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.97);
+  transform-origin: top left;
+  transition: opacity 0.22s, transform 0.22s, visibility 0.22s;
+}
+.lang-pill-wrap.open .lang-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.lang-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+.lang-opt .opt-flag { font-size: 1.1rem; line-height: 1; }
+.lang-opt .opt-label { flex: 1; }
+.lang-opt .opt-check { font-size: 0.75rem; color: var(--gold); opacity: 0; }
+.lang-opt:hover { background: rgba(201,168,76,0.08); color: var(--text); }
+.lang-opt.active { color: var(--gold-light); background: rgba(201,168,76,0.07); }
+.lang-opt.active .opt-check { opacity: 1; }
+.lang-dropdown-divider {
+  height: 1px;
+  background: rgba(201,168,76,0.1);
+  margin: 4px 6px;
+}
 
 /* ===== NAV ===== */
 nav { position: fixed; top: 0; width: 100%; z-index: 999; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(18,18,18,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
@@ -102,6 +164,8 @@ h1 { font-family: 'Amiri', serif; font-size: clamp(3.5rem, 8vw, 6rem); color: va
 
 /* ===== PAYMENT BUTTONS ===== */
 .donate-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; margin-bottom: 4px; }
+
+/* Arabic: Visa + Bankak */
 .pay-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 18px; text-decoration: none; font-family: 'Tajawal', sans-serif; transition: all 0.3s; min-width: 130px; padding: 16px 20px; cursor: pointer; }
 .pay-btn-visa { background: #1A1F71; border: 2px solid rgba(255,255,255,0.15); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
 .pay-btn-visa:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(26,31,113,0.6); border-color: rgba(255,255,255,0.3); }
@@ -113,6 +177,36 @@ h1 { font-family: 'Amiri', serif; font-size: clamp(3.5rem, 8vw, 6rem); color: va
 .bankak-logo { display: flex; align-items: center; justify-content: center; }
 .bankak-logo svg { width: 64px; height: 64px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5)); }
 .bankak-number { font-size: 0.82rem; color: rgba(255,255,255,0.75); letter-spacing: 2px; font-weight: 500; direction: ltr; }
+
+/* Crypto button */
+.pay-btn-crypto {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid rgba(99,179,237,0.3);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  min-width: 130px;
+  padding: 14px 18px;
+  gap: 8px;
+}
+.pay-btn-crypto:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(99,179,237,0.2);
+  border-color: rgba(99,179,237,0.55);
+}
+.crypto-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+.pay-btn-crypto .pay-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  text-align: center;
+}
 
 /* ===== STATS ===== */
 .gold-line { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
@@ -184,22 +278,21 @@ footer { padding: 40px 80px; background: #0D0D0D; border-top: 1px solid var(--bo
 .footer-links a:hover { color: var(--gold); }
 .footer-copy { color: rgba(240,235,224,0.2); font-size: 0.78rem; }
 
-/* ===== LTR OVERRIDE for non-Arabic languages ===== */
+/* ===== LTR OVERRIDE ===== */
 body.ltr { direction: ltr; font-family: 'Tajawal', sans-serif; }
 body.ltr .hero-ayah { font-family: 'Amiri', serif; direction: rtl; text-align: right; }
 body.ltr .hero-ayah-ref { direction: rtl; text-align: right; }
 body.ltr .hd-hadith p { direction: rtl; }
 body.ltr .donate-hadith p { direction: rtl; }
 body.ltr .contact-form { text-align: left; }
-body.ltr .lang-switcher { left: 16px; right: auto; }
-
-/* RTL override */
-body.rtl { direction: rtl; }
-body.rtl .lang-switcher { right: auto; left: 16px; }
+body.ltr .lang-pill-wrap { left: 18px; right: auto; }
+body.rtl .lang-pill-wrap { left: 18px; right: auto; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .lang-switcher { top: auto; bottom: 20px; left: 50%; transform: translateX(-50%); flex-direction: row; border-radius: 50px; padding: 8px 12px; }
+  .lang-pill-wrap { top: auto; bottom: 20px; left: 50%; transform: translateX(-50%); }
+  .lang-dropdown { left: 50%; transform: translateX(-50%) translateY(-6px) scale(0.97); transform-origin: bottom center; top: auto; bottom: calc(100% + 8px); }
+  .lang-pill-wrap.open .lang-dropdown { transform: translateX(-50%) translateY(0) scale(1); }
   nav { padding: 16px 24px; }
   .nav-links { display: none; }
   .hero { grid-template-columns: 1fr; padding: 100px 28px 60px; text-align: center; }
@@ -226,7 +319,25 @@ body.rtl .lang-switcher { right: auto; left: 16px; }
 </head>
 <body class="rtl">
 
-
+<!-- ===== LANGUAGE SWITCHER PILL ===== -->
+<div class="lang-pill-wrap" id="langPillWrap">
+  <button class="lang-pill-btn" id="langPillBtn" onclick="toggleLangMenu()" aria-haspopup="listbox" aria-expanded="false">
+    <span class="pill-flag" id="pillFlag">🇸🇦</span>
+    <span class="pill-name" id="pillName">العربية</span>
+    <span class="pill-arrow">▼</span>
+  </button>
+  <div class="lang-dropdown" id="langDropdown" role="listbox">
+    <button class="lang-opt active" data-lang="ar" onclick="selectLang('ar')"><span class="opt-flag">🇸🇦</span><span class="opt-label">العربية</span><span class="opt-check">✓</span></button>
+    <button class="lang-opt" data-lang="en" onclick="selectLang('en')"><span class="opt-flag">🇬🇧</span><span class="opt-label">English</span><span class="opt-check">✓</span></button>
+    <div class="lang-dropdown-divider"></div>
+    <button class="lang-opt" data-lang="tr" onclick="selectLang('tr')"><span class="opt-flag">🇹🇷</span><span class="opt-label">Türkçe</span><span class="opt-check">✓</span></button>
+    <button class="lang-opt" data-lang="id" onclick="selectLang('id')"><span class="opt-flag">🇮🇩</span><span class="opt-label">Bahasa Indonesia</span><span class="opt-check">✓</span></button>
+    <button class="lang-opt" data-lang="ms" onclick="selectLang('ms')"><span class="opt-flag">🇲🇾</span><span class="opt-label">Bahasa Melayu</span><span class="opt-check">✓</span></button>
+    <div class="lang-dropdown-divider"></div>
+    <button class="lang-opt" data-lang="kk" onclick="selectLang('kk')"><span class="opt-flag">🇰🇿</span><span class="opt-label">Қазақша</span><span class="opt-check">✓</span></button>
+    <button class="lang-opt" data-lang="ru" onclick="selectLang('ru')"><span class="opt-flag">🇷🇺</span><span class="opt-label">Русский</span><span class="opt-check">✓</span></button>
+  </div>
+</div>
 
 <!-- ===== NAV ===== -->
 <nav>
@@ -263,7 +374,9 @@ body.rtl .lang-switcher { right: auto; left: 16px; }
         <p data-t="hadithText">مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ</p>
         <span data-t="hadithRef">رواه مسلم</span>
       </div>
-      <div class="donate-btns">
+
+      <!-- Arabic payment: Visa + Bankak -->
+      <div class="donate-btns ar-only">
         <a href="https://musatafa.gumroad.com/l/fwyajh" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-visa">
           <div class="visa-logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 166" role="img" aria-label="Visa">
@@ -295,7 +408,24 @@ body.rtl .lang-switcher { right: auto; left: 16px; }
           <span class="bankak-number">5152889</span>
         </a>
       </div>
-      <p class="hd-note" data-t="donateNote">فيزا: رابط آمن • بنكك: حوّل مباشرة للرقم أعلاه</p>
+      <p class="hd-note ar-only" data-t="donateNote">فيزا: رابط آمن • بنكك: حوّل مباشرة للرقم أعلاه</p>
+
+      <!-- Non-Arabic payment: Visa + Crypto -->
+      <div class="donate-btns intl-only" style="display:none;">
+        <a href="https://musatafa.gumroad.com/l/fwyajh" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-visa">
+          <div class="visa-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 166" role="img" aria-label="Visa">
+              <path fill="#FFFFFF" d="M211.2 10.4l-33.6 145.2h-42.4L168.8 10.4h42.4zm178.4 93.8l22.3-61.5 12.8 61.5h-35.1zm47.3 51.4H476l-34.4-145.2H404c-8.2 0-15.1 4.8-18.2 12.1l-64.1 133.1h44.8l8.9-24.7h54.7l5.8 24.7zm-113.5-47.4c.2-43.6-60.3-46-59.9-65.4.1-5.9 5.8-12.2 18.1-13.8 6.1-.8 22.9-1.4 42 7.5l7.5-34.9C321.6-.1 307.1-2 295.1-2c-42.3 0-72.1 22.5-72.3 54.7-.3 23.8 21.2 37.1 37.4 45 16.6 8.1 22.2 13.3 22.1 20.5-.1 11.1-13.3 16-25.5 16.2-21.4.3-33.8-5.8-43.7-10.4l-7.7 36.1c9.9 4.6 28.3 8.6 47.3 8.8 44.8 0 74.1-22.1 74.3-56.5zM168.1 10.4L100.3 155.6H55.2L22 43c-2-7.8-3.7-10.7-9.8-14C2.7 24.8-14 20-28 17.1L-27 10.4h72.5c9.2 0 17.5 6.1 19.6 16.7l17.9 95.1 44.3-111.8h44.8z"/>
+            </svg>
+          </div>
+          <span class="pay-label" data-t="payCard">ادفع بالبطاقة</span>
+        </a>
+        <a href="https://nowpayments.io/donation/Awab" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-crypto">
+          <div class="crypto-icon-row">₿ Ξ ◎</div>
+          <span class="pay-label" data-t="payCrypto">Crypto</span>
+        </a>
+      </div>
+      <p class="hd-note intl-only" style="display:none;" data-t="donateNoteIntl">Card: secure link • Crypto: BTC, ETH & more</p>
     </div>
   </div>
 </section>
@@ -360,7 +490,9 @@ body.rtl .lang-switcher { right: auto; left: 16px; }
         <p data-t="hadithText">مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ</p>
         <span data-t="hadithRef">رواه مسلم</span>
       </div>
-      <div class="donate-btns">
+
+      <!-- Arabic: Visa + Bankak -->
+      <div class="donate-btns ar-only">
         <a href="https://musatafa.gumroad.com/l/fwyajh" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-visa">
           <div class="visa-logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 166" role="img" aria-label="Visa">
@@ -392,7 +524,24 @@ body.rtl .lang-switcher { right: auto; left: 16px; }
           <span class="bankak-number">5152889</span>
         </a>
       </div>
-      <p class="donate-note" data-t="donateNote">فيزا: رابط آمن • بنكك: حوّل مباشرة للرقم أعلاه</p>
+      <p class="donate-note ar-only" data-t="donateNote">فيزا: رابط آمن • بنكك: حوّل مباشرة للرقم أعلاه</p>
+
+      <!-- Non-Arabic: Visa + Crypto -->
+      <div class="donate-btns intl-only" style="display:none;">
+        <a href="https://musatafa.gumroad.com/l/fwyajh" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-visa">
+          <div class="visa-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 166" role="img" aria-label="Visa">
+              <path fill="#FFFFFF" d="M211.2 10.4l-33.6 145.2h-42.4L168.8 10.4h42.4zm178.4 93.8l22.3-61.5 12.8 61.5h-35.1zm47.3 51.4H476l-34.4-145.2H404c-8.2 0-15.1 4.8-18.2 12.1l-64.1 133.1h44.8l8.9-24.7h54.7l5.8 24.7zm-113.5-47.4c.2-43.6-60.3-46-59.9-65.4.1-5.9 5.8-12.2 18.1-13.8 6.1-.8 22.9-1.4 42 7.5l7.5-34.9C321.6-.1 307.1-2 295.1-2c-42.3 0-72.1 22.5-72.3 54.7-.3 23.8 21.2 37.1 37.4 45 16.6 8.1 22.2 13.3 22.1 20.5-.1 11.1-13.3 16-25.5 16.2-21.4.3-33.8-5.8-43.7-10.4l-7.7 36.1c9.9 4.6 28.3 8.6 47.3 8.8 44.8 0 74.1-22.1 74.3-56.5zM168.1 10.4L100.3 155.6H55.2L22 43c-2-7.8-3.7-10.7-9.8-14C2.7 24.8-14 20-28 17.1L-27 10.4h72.5c9.2 0 17.5 6.1 19.6 16.7l17.9 95.1 44.3-111.8h44.8z"/>
+            </svg>
+          </div>
+          <span class="pay-label" data-t="payCard">Card</span>
+        </a>
+        <a href="https://nowpayments.io/donation/Awab" target="_blank" rel="noopener noreferrer" class="pay-btn pay-btn-crypto">
+          <div class="crypto-icon-row">₿ Ξ ◎</div>
+          <span class="pay-label" data-t="payCrypto">Crypto</span>
+        </a>
+      </div>
+      <p class="donate-note intl-only" style="display:none;" data-t="donateNoteIntl">Card: secure link • Crypto: BTC, ETH & more</p>
     </div>
   </div>
 </section>
@@ -437,34 +586,38 @@ body.rtl .lang-switcher { right: auto; left: 16px; }
 
 <script>
 // =============================================
+// LANG DATA (flag + native name for pill)
+// =============================================
+const langMeta = {
+  ar: { flag: '🇸🇦', name: 'العربية' },
+  en: { flag: '🇬🇧', name: 'English' },
+  tr: { flag: '🇹🇷', name: 'Türkçe' },
+  id: { flag: '🇮🇩', name: 'Indonesia' },
+  ms: { flag: '🇲🇾', name: 'Melayu' },
+  kk: { flag: '🇰🇿', name: 'Қазақша' },
+  ru: { flag: '🇷🇺', name: 'Русский' },
+};
+
+// =============================================
 // TRANSLATIONS
 // =============================================
 const translations = {
-
   ar: {
     dir: 'rtl', lang: 'ar',
     appName: 'نديم',
-    nav_features: 'المميزات',
-    nav_screenshots: 'لقطات الشاشة',
-    nav_donate: 'تبرع',
-    nav_contact: 'تواصل معنا',
-    nav_privacy: 'الخصوصية',
-    nav_home: 'الرئيسية',
-    nav_terms: 'شروط الاستخدام',
-    heroEyebrow: 'تطبيق تسميع القرآن الكريم',
-    ayahRef: 'سورة المزمل — آية ٤',
+    nav_features: 'المميزات', nav_screenshots: 'لقطات الشاشة', nav_donate: 'تبرع',
+    nav_contact: 'تواصل معنا', nav_privacy: 'الخصوصية', nav_home: 'الرئيسية', nav_terms: 'شروط الاستخدام',
+    heroEyebrow: 'تطبيق تسميع القرآن الكريم', ayahRef: 'سورة المزمل — آية ٤',
     heroDesc: 'رفيقك الذكي في مراجعة وحفظ القرآن الكريم — يستمع لتلاوتك ويصحّح أخطاءك فوراً بتقنية الذكاء الاصطناعي.',
-    downloadBtn: '⬇️ حمّل التطبيق',
-    discoverBtn: 'اكتشف المميزات',
+    downloadBtn: '⬇️ حمّل التطبيق', discoverBtn: 'اكتشف المميزات',
     donateTitle: 'تصدّق وادعم المشروع',
     donateDesc: 'نديم تطبيق مجاني تماماً لخدمة القرآن الكريم وأهله. إن وجدت فيه فائدةً فأسهم في استمراره — كل تبرع مهما صغر يُسهم في تطويره وتحسينه.',
-    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ',
-    hadithRef: 'رواه مسلم',
-    payCard: 'ادفع بالبطاقة',
+    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ', hadithRef: 'رواه مسلم',
+    payCard: 'ادفع بالبطاقة', payCrypto: 'عملات رقمية',
     donateNote: 'فيزا: رابط آمن • بنكك: حوّل مباشرة للرقم أعلاه',
+    donateNoteIntl: 'فيزا: رابط آمن • عملات رقمية: BTC وETH والمزيد',
     statSuras: 'سورة', statPages: 'صفحة', statModes: 'أوضاع تسميع', statVerses: 'آية',
-    featuresTag: 'المميزات',
-    featuresTitle: 'كل ما تحتاجه لمراجعة حفظك',
+    featuresTag: 'المميزات', featuresTitle: 'كل ما تحتاجه لمراجعة حفظك',
     featuresSub: 'أدوات ذكية صُممت لمساعدتك على إتقان حفظ القرآن الكريم',
     f1t: 'قراءة كاملة للمصحف', f1d: 'اقرأ القرآن الكريم كاملاً بخط عثماني أصيل — ١١٤ سورة و٦٠٤ صفحة بتصفح سلس وجميل.',
     f2t: 'تسميع بالذكاء الاصطناعي', f2d: 'تكلّم والتطبيق يصحح فوراً — الكلمات الصحيحة باللون الأخضر والأخطاء باللون الأحمر لحظةً بلحظة.',
@@ -472,353 +625,280 @@ const translations = {
     f4t: 'نظام التلميح', f4d: 'نسيت الآية التالية؟ اضغط تلميحاً ويكشف لك الكلمات العشر التالية دون مغادرة وضع التسميع.',
     f5t: 'تقييم فوري بالنسبة المئوية', f5d: 'بعد كل جلسة تحصل على درجة مئوية دقيقة تعكس جودة حفظك وتساعدك على التطور.',
     f6t: 'المفضلة وآخر قراءة', f6d: 'احفظ السور المفضلة وتتبّع آخر ما قرأت — يتذكر التطبيق مكانك دائماً.',
-    screensTag: 'لقطات الشاشة',
-    screensTitle: 'شاهد نديم من الداخل',
+    screensTag: 'لقطات الشاشة', screensTitle: 'شاهد نديم من الداخل',
     screensSub: 'واجهة أنيقة وسهلة الاستخدام صُممت بعناية لتجربة قرآنية فريدة',
     screen1t: 'وضع القراءة', screen1d: 'نص قرآني بخط عثماني أصيل',
     screen2t: 'الشاشة الرئيسية', screen2d: 'قائمة السور الكاملة',
     screen3t: 'وضع الاختبار', screen3d: 'اختبر نفسك في أي نطاق',
-    donateTag: 'ادعم المشروع',
-    donateSectionTitle: 'ساهم في استمرار نديم',
+    donateTag: 'ادعم المشروع', donateSectionTitle: 'ساهم في استمرار نديم',
     donateSectionSub: 'تبرعك يساعد على تطوير التطبيق وإضافة مميزات جديدة لخدمة حفّاظ القرآن الكريم',
-    contactTag: 'تواصل معنا',
-    contactTitle: 'نسعد بسماعك',
+    contactTag: 'تواصل معنا', contactTitle: 'نسعد بسماعك',
     contactSub: 'لأي استفسار أو اقتراح أو مشكلة تقنية — فريقنا هنا للمساعدة',
-    formName: 'الاسم', formNamePh: 'اسمك الكريم',
-    formEmail: 'البريد الإلكتروني',
+    formName: 'الاسم', formNamePh: 'اسمك الكريم', formEmail: 'البريد الإلكتروني',
     formSubject: 'الموضوع', formSubjectPh: 'موضوع رسالتك',
     formMessage: 'الرسالة', formMessagePh: 'اكتب رسالتك هنا...',
-    formSubmit: 'إرسال الرسالة ✦',
-    formSending: '⏳ جاري الإرسال...',
-    formSuccess: '✅ تم الإرسال بنجاح!',
-    formError: '❌ فشل الإرسال، حاول مرة أخرى',
+    formSubmit: 'إرسال الرسالة ✦', formSending: '⏳ جاري الإرسال...',
+    formSuccess: '✅ تم الإرسال بنجاح!', formError: '❌ فشل الإرسال، حاول مرة أخرى',
     footerCopy: '© 2026 نديم — جميع الحقوق محفوظة',
   },
-
   en: {
     dir: 'ltr', lang: 'en',
     appName: 'Nadeem',
-    nav_features: 'Features',
-    nav_screenshots: 'Screenshots',
-    nav_donate: 'Donate',
-    nav_contact: 'Contact',
-    nav_privacy: 'Privacy',
-    nav_home: 'Home',
-    nav_terms: 'Terms',
-    heroEyebrow: 'Quran Memorization App',
-    ayahRef: 'Surah Al-Muzzammil — Verse 4',
-    heroDesc: 'Your intelligent companion for reviewing and memorizing the Holy Quran — it listens to your recitation and corrects your mistakes instantly with AI technology.',
-    downloadBtn: '⬇️ Download the App',
-    discoverBtn: 'Discover Features',
+    nav_features: 'Features', nav_screenshots: 'Screenshots', nav_donate: 'Donate',
+    nav_contact: 'Contact', nav_privacy: 'Privacy', nav_home: 'Home', nav_terms: 'Terms',
+    heroEyebrow: 'Quran Memorization App', ayahRef: 'Surah Al-Muzzammil — Verse 4',
+    heroDesc: 'Your intelligent companion for reviewing and memorizing the Holy Quran — listens to your recitation and corrects mistakes instantly with AI.',
+    downloadBtn: '⬇️ Download the App', discoverBtn: 'Discover Features',
     donateTitle: 'Support the Project',
-    donateDesc: 'Nadeem is a completely free app dedicated to serving the Holy Quran and its memorizers. If you find it beneficial, help keep it going — every donation, however small, contributes to its development.',
-    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ',
-    hadithRef: 'Narrated by Muslim',
-    payCard: 'Pay by Card',
-    donateNote: 'Visa: secure link • Bankak: transfer directly to the number above',
+    donateDesc: 'Nadeem is completely free, dedicated to serving the Holy Quran and its memorizers. If you find it beneficial, help keep it going — every donation contributes to its development.',
+    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ', hadithRef: 'Narrated by Muslim',
+    payCard: 'Pay by Card', payCrypto: 'Crypto',
+    donateNote: 'Visa: secure link • Bankak: transfer directly to number above',
+    donateNoteIntl: 'Card: secure link • Crypto: BTC, ETH & more',
     statSuras: 'Surahs', statPages: 'Pages', statModes: 'Recitation Modes', statVerses: 'Verses',
-    featuresTag: 'Features',
-    featuresTitle: 'Everything You Need to Review Your Memorization',
+    featuresTag: 'Features', featuresTitle: 'Everything You Need to Review Your Memorization',
     featuresSub: 'Smart tools designed to help you master Holy Quran memorization',
-    f1t: 'Full Quran Reading', f1d: 'Read the entire Holy Quran in authentic Uthmani script — 114 surahs and 604 pages with smooth, beautiful navigation.',
-    f2t: 'AI-Powered Recitation', f2d: 'Speak and the app corrects instantly — correct words in green and mistakes in red, moment by moment.',
-    f3t: 'Smart Test Mode', f3d: 'Selects a random verse, plays its audio, then asks you to continue — test yourself in any section you choose.',
+    f1t: 'Full Quran Reading', f1d: 'Read the entire Holy Quran in authentic Uthmani script — 114 surahs and 604 pages with smooth navigation.',
+    f2t: 'AI-Powered Recitation', f2d: 'Speak and the app corrects instantly — correct words in green, mistakes in red, moment by moment.',
+    f3t: 'Smart Test Mode', f3d: 'Selects a random verse, plays its audio, then asks you to continue — test yourself in any section.',
     f4t: 'Hint System', f4d: 'Forgot the next verse? Tap for a hint and it reveals the next ten words without leaving recitation mode.',
     f5t: 'Instant Percentage Score', f5d: 'After each session you receive an accurate percentage grade reflecting the quality of your memorization.',
     f6t: 'Favorites & Last Read', f6d: 'Save favorite surahs and track where you left off — the app always remembers your place.',
-    screensTag: 'Screenshots',
-    screensTitle: 'See Nadeem From the Inside',
-    screensSub: 'An elegant, easy-to-use interface crafted carefully for a unique Quranic experience',
+    screensTag: 'Screenshots', screensTitle: 'See Nadeem From the Inside',
+    screensSub: 'An elegant, easy-to-use interface crafted for a unique Quranic experience',
     screen1t: 'Reading Mode', screen1d: 'Quranic text in authentic Uthmani script',
     screen2t: 'Home Screen', screen2d: 'Complete surah list',
     screen3t: 'Exam Mode', screen3d: 'Test yourself in any range',
-    donateTag: 'Support the Project',
-    donateSectionTitle: 'Help Keep Nadeem Going',
-    donateSectionSub: 'Your donation helps develop the app and add new features to serve Quran memorizers',
-    contactTag: 'Contact Us',
-    contactTitle: 'We\'d Love to Hear From You',
+    donateTag: 'Support the Project', donateSectionTitle: 'Help Keep Nadeem Going',
+    donateSectionSub: 'Your donation helps develop the app and add new features for Quran memorizers',
+    contactTag: 'Contact Us', contactTitle: "We'd Love to Hear From You",
     contactSub: 'For any inquiry, suggestion, or technical issue — our team is here to help',
-    formName: 'Name', formNamePh: 'Your name',
-    formEmail: 'Email',
+    formName: 'Name', formNamePh: 'Your name', formEmail: 'Email',
     formSubject: 'Subject', formSubjectPh: 'Subject of your message',
     formMessage: 'Message', formMessagePh: 'Write your message here...',
-    formSubmit: 'Send Message ✦',
-    formSending: '⏳ Sending...',
-    formSuccess: '✅ Sent successfully!',
-    formError: '❌ Failed to send, please try again',
+    formSubmit: 'Send Message ✦', formSending: '⏳ Sending...',
+    formSuccess: '✅ Sent successfully!', formError: '❌ Failed to send, please try again',
     footerCopy: '© 2026 Nadeem — All rights reserved',
   },
-
   tr: {
     dir: 'ltr', lang: 'tr',
     appName: 'Nedim',
-    nav_features: 'Özellikler',
-    nav_screenshots: 'Ekran Görüntüleri',
-    nav_donate: 'Bağış',
-    nav_contact: 'İletişim',
-    nav_privacy: 'Gizlilik',
-    nav_home: 'Ana Sayfa',
-    nav_terms: 'Kullanım Şartları',
-    heroEyebrow: 'Kuran Ezberleme Uygulaması',
-    ayahRef: 'Müzzemmil Suresi — 4. Ayet',
-    heroDesc: 'Kuran-ı Kerim\'i gözden geçirme ve ezberleme konusunda akıllı yoldaşınız — tilawetinizi dinler ve hatalarınızı anında yapay zeka teknolojisiyle düzeltir.',
-    downloadBtn: '⬇️ Uygulamayı İndir',
-    discoverBtn: 'Özellikleri Keşfet',
+    nav_features: 'Özellikler', nav_screenshots: 'Ekran Görüntüleri', nav_donate: 'Bağış',
+    nav_contact: 'İletişim', nav_privacy: 'Gizlilik', nav_home: 'Ana Sayfa', nav_terms: 'Kullanım Şartları',
+    heroEyebrow: 'Kuran Ezberleme Uygulaması', ayahRef: 'Müzzemmil Suresi — 4. Ayet',
+    heroDesc: 'Kuran\'ı gözden geçirme ve ezberleme konusunda akıllı yoldaşınız — tilawetinizi dinler ve hatalarınızı anında yapay zeka ile düzeltir.',
+    downloadBtn: '⬇️ Uygulamayı İndir', discoverBtn: 'Özellikleri Keşfet',
     donateTitle: 'Projeyi Destekle',
-    donateDesc: 'Nedim, Kuran-ı Kerim ve hafızlarına hizmet için tamamen ücretsiz bir uygulamadır. Faydalı bulduysanız devam etmesine katkıda bulunun — her bağış ne kadar küçük olursa olsun gelişimine katkı sağlar.',
-    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ',
-    hadithRef: 'Müslim rivayeti',
-    payCard: 'Kartla Öde',
-    donateNote: 'Visa: güvenli bağlantı • Bankak: yukarıdaki numaraya doğrudan havale',
+    donateDesc: 'Nedim, Kuran\'a hizmet için tamamen ücretsiz bir uygulamadır. Faydalı bulduysanız devam etmesine katkıda bulunun — her bağış gelişimine katkı sağlar.',
+    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ', hadithRef: 'Müslim rivayeti',
+    payCard: 'Kartla Öde', payCrypto: 'Kripto',
+    donateNote: 'Visa: güvenli bağlantı • Bankak: yukarıdaki numaraya havale',
+    donateNoteIntl: 'Kart: güvenli bağlantı • Kripto: BTC, ETH ve daha fazlası',
     statSuras: 'Sure', statPages: 'Sayfa', statModes: 'Ezber Modu', statVerses: 'Ayet',
-    featuresTag: 'Özellikler',
-    featuresTitle: 'Ezberleme Tekrarı İçin İhtiyacınız Olan Her Şey',
-    featuresSub: 'Kuran-ı Kerim ezberlemenizi mükemmelleştirmenize yardımcı olmak için tasarlanmış akıllı araçlar',
-    f1t: 'Tam Kuran Okuma', f1d: 'Kuran-ı Kerim\'i tamamını özgün Osmanlı hattıyla okuyun — 114 sure ve 604 sayfa, akıcı ve güzel gezinmeyle.',
-    f2t: 'Yapay Zeka Destekli Ezber', f2d: 'Konuşun ve uygulama anında düzeltir — doğru kelimeler yeşil, hatalar kırmızı, an be an.',
-    f3t: 'Akıllı Test Modu', f3d: 'Rastgele bir ayet seçer, sesini oynatır ve devam etmenizi ister — istediğiniz bölümde kendinizi sınayın.',
-    f4t: 'İpucu Sistemi', f4d: 'Sonraki ayeti unuttunuz mu? İpucu\'na dokunun ve ezber modundan çıkmadan sonraki on kelimeyi görsün.',
+    featuresTag: 'Özellikler', featuresTitle: 'Ezberleme Tekrarı İçin İhtiyacınız Olan Her Şey',
+    featuresSub: 'Kuran ezberlemenizi mükemmelleştirmenize yardımcı olmak için tasarlanmış akıllı araçlar',
+    f1t: 'Tam Kuran Okuma', f1d: 'Kuran\'ı tamamını özgün Osmanlı hattıyla okuyun — 114 sure ve 604 sayfa.',
+    f2t: 'Yapay Zeka Destekli Ezber', f2d: 'Konuşun ve uygulama anında düzeltir — doğru kelimeler yeşil, hatalar kırmızı.',
+    f3t: 'Akıllı Test Modu', f3d: 'Rastgele bir ayet seçer, sesini oynatır ve devam etmenizi ister.',
+    f4t: 'İpucu Sistemi', f4d: 'Sonraki ayeti unuttunuz mu? İpucu\'na dokunun ve sonraki on kelimeyi görün.',
     f5t: 'Anında Yüzde Puanı', f5d: 'Her oturumun ardından ezberleme kalitenizi yansıtan kesin bir yüzde notu alırsınız.',
-    f6t: 'Favoriler ve Son Okuma', f6d: 'Favori sureleri kaydedin ve kaldığınız yeri takip edin — uygulama yerinizi her zaman hatırlar.',
-    screensTag: 'Ekran Görüntüleri',
-    screensTitle: 'Nedim\'i İçeriden Görün',
-    screensSub: 'Benzersiz bir Kuran deneyimi için özenle tasarlanmış zarif ve kullanımı kolay arayüz',
+    f6t: 'Favoriler ve Son Okuma', f6d: 'Favori sureleri kaydedin ve kaldığınız yeri takip edin.',
+    screensTag: 'Ekran Görüntüleri', screensTitle: "Nedim'i İçeriden Görün",
+    screensSub: 'Benzersiz bir Kuran deneyimi için özenle tasarlanmış zarif arayüz',
     screen1t: 'Okuma Modu', screen1d: 'Özgün Osmanlı hattıyla Kuran metni',
     screen2t: 'Ana Ekran', screen2d: 'Tam sure listesi',
     screen3t: 'Sınav Modu', screen3d: 'Herhangi bir aralıkta kendinizi test edin',
-    donateTag: 'Projeyi Destekle',
-    donateSectionTitle: 'Nedim\'in Devamına Yardım Edin',
-    donateSectionSub: 'Bağışınız uygulamanın geliştirilmesine ve Kuran hafızlarına hizmet edecek yeni özellikler eklenmesine yardımcı olur',
-    contactTag: 'İletişim',
-    contactTitle: 'Sizi Duymaktan Mutluluk Duyarız',
+    donateTag: 'Projeyi Destekle', donateSectionTitle: "Nedim'in Devamına Yardım Edin",
+    donateSectionSub: 'Bağışınız uygulamanın geliştirilmesine ve yeni özellikler eklenmesine yardımcı olur',
+    contactTag: 'İletişim', contactTitle: 'Sizi Duymaktan Mutluluk Duyarız',
     contactSub: 'Herhangi bir soru, öneri veya teknik sorun için — ekibimiz yardım etmek için burada',
-    formName: 'Ad', formNamePh: 'Adınız',
-    formEmail: 'E-posta',
+    formName: 'Ad', formNamePh: 'Adınız', formEmail: 'E-posta',
     formSubject: 'Konu', formSubjectPh: 'Mesajınızın konusu',
     formMessage: 'Mesaj', formMessagePh: 'Mesajınızı buraya yazın...',
-    formSubmit: 'Mesaj Gönder ✦',
-    formSending: '⏳ Gönderiliyor...',
-    formSuccess: '✅ Başarıyla gönderildi!',
-    formError: '❌ Gönderilemedi, lütfen tekrar deneyin',
+    formSubmit: 'Mesaj Gönder ✦', formSending: '⏳ Gönderiliyor...',
+    formSuccess: '✅ Başarıyla gönderildi!', formError: '❌ Gönderilemedi, tekrar deneyin',
     footerCopy: '© 2026 Nedim — Tüm hakları saklıdır',
   },
-
   id: {
     dir: 'ltr', lang: 'id',
     appName: 'Nadeem',
-    nav_features: 'Fitur',
-    nav_screenshots: 'Tangkapan Layar',
-    nav_donate: 'Donasi',
-    nav_contact: 'Hubungi Kami',
-    nav_privacy: 'Privasi',
-    nav_home: 'Beranda',
-    nav_terms: 'Syarat Penggunaan',
-    heroEyebrow: 'Aplikasi Hafalan Al-Qur\'an',
-    ayahRef: 'Surah Al-Muzzammil — Ayat 4',
-    heroDesc: 'Teman cerdas Anda dalam murajaah dan menghafal Al-Qur\'an — mendengarkan bacaan Anda dan langsung mengoreksi kesalahan dengan teknologi kecerdasan buatan.',
-    downloadBtn: '⬇️ Unduh Aplikasi',
-    discoverBtn: 'Temukan Fitur',
+    nav_features: 'Fitur', nav_screenshots: 'Tangkapan Layar', nav_donate: 'Donasi',
+    nav_contact: 'Hubungi Kami', nav_privacy: 'Privasi', nav_home: 'Beranda', nav_terms: 'Syarat Penggunaan',
+    heroEyebrow: "Aplikasi Hafalan Al-Qur'an", ayahRef: 'Surah Al-Muzzammil — Ayat 4',
+    heroDesc: "Teman cerdas Anda dalam murajaah dan menghafal Al-Qur'an — mendengarkan bacaan Anda dan langsung mengoreksi kesalahan dengan AI.",
+    downloadBtn: '⬇️ Unduh Aplikasi', discoverBtn: 'Temukan Fitur',
     donateTitle: 'Dukung Proyek Ini',
-    donateDesc: 'Nadeem adalah aplikasi gratis sepenuhnya untuk melayani Al-Qur\'an dan para penghafalnya. Jika Anda merasa bermanfaat, bantu keberlangsungannya — setiap donasi sekecil apapun berkontribusi pada pengembangannya.',
-    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ',
-    hadithRef: 'HR. Muslim',
-    payCard: 'Bayar dengan Kartu',
-    donateNote: 'Visa: tautan aman • Bankak: transfer langsung ke nomor di atas',
+    donateDesc: "Nadeem adalah aplikasi gratis sepenuhnya untuk melayani Al-Qur'an. Jika bermanfaat, bantu keberlangsungannya — setiap donasi berkontribusi pada pengembangannya.",
+    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ', hadithRef: 'HR. Muslim',
+    payCard: 'Bayar dengan Kartu', payCrypto: 'Kripto',
+    donateNote: 'Visa: tautan aman • Bankak: transfer ke nomor di atas',
+    donateNoteIntl: 'Kartu: tautan aman • Kripto: BTC, ETH & lainnya',
     statSuras: 'Surah', statPages: 'Halaman', statModes: 'Mode Hafalan', statVerses: 'Ayat',
-    featuresTag: 'Fitur',
-    featuresTitle: 'Semua yang Anda Butuhkan untuk Murajaah',
-    featuresSub: 'Alat cerdas yang dirancang untuk membantu Anda menyempurnakan hafalan Al-Qur\'an',
-    f1t: 'Pembacaan Al-Qur\'an Lengkap', f1d: 'Baca seluruh Al-Qur\'an dengan tulisan Utsmani asli — 114 surah dan 604 halaman dengan navigasi yang lancar dan indah.',
-    f2t: 'Setoran dengan Kecerdasan Buatan', f2d: 'Bicaralah dan aplikasi langsung mengoreksi — kata yang benar berwarna hijau dan kesalahan berwarna merah, seketika.',
-    f3t: 'Mode Ujian Cerdas', f3d: 'Memilih ayat acak, memutarkan suaranya, lalu meminta Anda melanjutkan — uji diri Anda di bagian mana pun.',
-    f4t: 'Sistem Petunjuk', f4d: 'Lupa ayat berikutnya? Ketuk petunjuk dan ia mengungkap sepuluh kata berikutnya tanpa keluar dari mode hafalan.',
-    f5t: 'Nilai Persentase Langsung', f5d: 'Setelah setiap sesi Anda mendapatkan nilai persentase akurat yang mencerminkan kualitas hafalan Anda.',
-    f6t: 'Favorit & Terakhir Dibaca', f6d: 'Simpan surah favorit dan lacak terakhir kali Anda membaca — aplikasi selalu mengingat posisi Anda.',
-    screensTag: 'Tangkapan Layar',
-    screensTitle: 'Lihat Nadeem dari Dalam',
-    screensSub: 'Antarmuka elegan dan mudah digunakan yang dirancang dengan cermat untuk pengalaman Qur\'ani yang unik',
-    screen1t: 'Mode Membaca', screen1d: 'Teks Qur\'an dalam tulisan Utsmani asli',
+    featuresTag: 'Fitur', featuresTitle: 'Semua yang Anda Butuhkan untuk Murajaah',
+    featuresSub: "Alat cerdas yang dirancang untuk membantu Anda menyempurnakan hafalan Al-Qur'an",
+    f1t: "Pembacaan Al-Qur'an Lengkap", f1d: "Baca seluruh Al-Qur'an dengan tulisan Utsmani asli — 114 surah dan 604 halaman.",
+    f2t: 'Setoran dengan AI', f2d: 'Bicaralah dan aplikasi langsung mengoreksi — kata benar hijau, kesalahan merah.',
+    f3t: 'Mode Ujian Cerdas', f3d: 'Memilih ayat acak, memutarkan suaranya, lalu meminta Anda melanjutkan.',
+    f4t: 'Sistem Petunjuk', f4d: 'Lupa ayat berikutnya? Ketuk petunjuk dan ia mengungkap sepuluh kata berikutnya.',
+    f5t: 'Nilai Persentase Langsung', f5d: 'Setelah setiap sesi Anda mendapatkan nilai persentase akurat.',
+    f6t: 'Favorit & Terakhir Dibaca', f6d: 'Simpan surah favorit dan lacak terakhir kali Anda membaca.',
+    screensTag: 'Tangkapan Layar', screensTitle: 'Lihat Nadeem dari Dalam',
+    screensSub: "Antarmuka elegan untuk pengalaman Qur'ani yang unik",
+    screen1t: 'Mode Membaca', screen1d: 'Teks Quran dalam tulisan Utsmani asli',
     screen2t: 'Layar Beranda', screen2d: 'Daftar surah lengkap',
     screen3t: 'Mode Ujian', screen3d: 'Uji diri Anda dalam rentang apapun',
-    donateTag: 'Dukung Proyek',
-    donateSectionTitle: 'Bantu Keberlangsungan Nadeem',
-    donateSectionSub: 'Donasi Anda membantu mengembangkan aplikasi dan menambah fitur baru untuk melayani para penghafal Al-Qur\'an',
-    contactTag: 'Hubungi Kami',
-    contactTitle: 'Kami Senang Mendengar dari Anda',
+    donateTag: 'Dukung Proyek', donateSectionTitle: 'Bantu Keberlangsungan Nadeem',
+    donateSectionSub: "Donasi Anda membantu mengembangkan aplikasi untuk para penghafal Al-Qur'an",
+    contactTag: 'Hubungi Kami', contactTitle: 'Kami Senang Mendengar dari Anda',
     contactSub: 'Untuk pertanyaan, saran, atau masalah teknis — tim kami siap membantu',
-    formName: 'Nama', formNamePh: 'Nama Anda',
-    formEmail: 'Email',
+    formName: 'Nama', formNamePh: 'Nama Anda', formEmail: 'Email',
     formSubject: 'Subjek', formSubjectPh: 'Subjek pesan Anda',
     formMessage: 'Pesan', formMessagePh: 'Tulis pesan Anda di sini...',
-    formSubmit: 'Kirim Pesan ✦',
-    formSending: '⏳ Mengirim...',
-    formSuccess: '✅ Berhasil dikirim!',
-    formError: '❌ Gagal mengirim, coba lagi',
+    formSubmit: 'Kirim Pesan ✦', formSending: '⏳ Mengirim...',
+    formSuccess: '✅ Berhasil dikirim!', formError: '❌ Gagal mengirim, coba lagi',
     footerCopy: '© 2026 Nadeem — Semua hak dilindungi',
   },
-
   kk: {
     dir: 'ltr', lang: 'kk',
     appName: 'Надим',
-    nav_features: 'Мүмкіндіктер',
-    nav_screenshots: 'Скриншоттар',
-    nav_donate: 'Қайырымдылық',
-    nav_contact: 'Бізбен байланыс',
-    nav_privacy: 'Құпиялылық',
-    nav_home: 'Басты бет',
-    nav_terms: 'Пайдалану шарттары',
-    heroEyebrow: 'Құран жаттау қосымшасы',
-    ayahRef: 'Муззаммил сүресі — 4-аят',
-    heroDesc: 'Құранды қайталап жаттауға арналған ақылды серіктесіңіз — тілауатыңызды тыңдайды және қателеріңізді жасанды интеллект технологиясымен бірден түзетеді.',
-    downloadBtn: '⬇️ Қосымшаны жүктеу',
-    discoverBtn: 'Мүмкіндіктерді зерттеу',
+    nav_features: 'Мүмкіндіктер', nav_screenshots: 'Скриншоттар', nav_donate: 'Қайырымдылық',
+    nav_contact: 'Байланыс', nav_privacy: 'Құпиялылық', nav_home: 'Басты бет', nav_terms: 'Пайдалану шарттары',
+    heroEyebrow: 'Құран жаттау қосымшасы', ayahRef: 'Муззаммил сүресі — 4-аят',
+    heroDesc: 'Құранды жаттауға арналған ақылды серіктесіңіз — тілауатыңызды тыңдайды және қателеріңізді AI арқылы бірден түзетеді.',
+    downloadBtn: '⬇️ Қосымшаны жүктеу', discoverBtn: 'Мүмкіндіктерді зерттеу',
     donateTitle: 'Жобаны қолдаңыз',
-    donateDesc: 'Надим — Құран Кәрімге және оны жаттаушыларға қызмет ету үшін толығымен тегін қосымша. Пайдалы деп тапсаңыз, оның жалғасуына үлес қосыңыз — кез-келген қайырымдылық, қаншама аз болса да, дамытуға ықпал етеді.',
-    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ',
-    hadithRef: 'Муслим жеткізген',
-    payCard: 'Картамен төлеу',
-    donateNote: 'Visa: қауіпсіз сілтеме • Bankak: жоғарыдағы нөмірге тікелей аудару',
+    donateDesc: 'Надим — Құранға қызмет ету үшін толығымен тегін қосымша. Пайдалы деп тапсаңыз, оның жалғасуына үлес қосыңыз.',
+    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ', hadithRef: 'Муслим жеткізген',
+    payCard: 'Картамен төлеу', payCrypto: 'Крипто',
+    donateNote: 'Visa: қауіпсіз сілтеме • Bankak: жоғарыдағы нөмірге аудару',
+    donateNoteIntl: 'Карта: қауіпсіз сілтеме • Крипто: BTC, ETH және т.б.',
     statSuras: 'Сүре', statPages: 'Бет', statModes: 'Жаттау режимі', statVerses: 'Аят',
-    featuresTag: 'Мүмкіндіктер',
-    featuresTitle: 'Жаттауды қайталауға қажеттінің бәрі',
-    featuresSub: 'Құран Кәрімді жаттауды жетілдіруге көмектесетін ақылды құралдар',
-    f1t: 'Толық Құран оқу', f1d: 'Нағыз Осман жазуымен толық Құранды оқыңыз — 114 сүре және 604 бет, тегіс және әдемі шарлаумен.',
-    f2t: 'Жасанды интеллект арқылы жаттау', f2d: 'Сөйлеңіз, қосымша бірден түзетеді — дұрыс сөздер жасыл, қателер қызыл түспен, лезде.',
-    f3t: 'Ақылды сынақ режимі', f3d: 'Кездейсоқ аят таңдап, дыбысын ойнатады, содан кейін жалғастыруды сұрайды — қалаған бөлімде өзіңізді тексеріңіз.',
-    f4t: 'Кеңес жүйесі', f4d: 'Келесі аятты ұмыттыңыз ба? Кеңеске басыңыз, жаттау режимінен шықпай келесі он сөзді ашады.',
+    featuresTag: 'Мүмкіндіктер', featuresTitle: 'Жаттауды қайталауға қажеттінің бәрі',
+    featuresSub: 'Құран жаттауды жетілдіруге көмектесетін ақылды құралдар',
+    f1t: 'Толық Құран оқу', f1d: 'Нағыз Осман жазуымен толық Құранды оқыңыз — 114 сүре және 604 бет.',
+    f2t: 'AI арқылы жаттау', f2d: 'Сөйлеңіз, қосымша бірден түзетеді — дұрыс сөздер жасыл, қателер қызыл.',
+    f3t: 'Ақылды сынақ режимі', f3d: 'Кездейсоқ аят таңдап, дыбысын ойнатады, содан кейін жалғастыруды сұрайды.',
+    f4t: 'Кеңес жүйесі', f4d: 'Келесі аятты ұмыттыңыз ба? Кеңеске басыңыз, келесі он сөзді ашады.',
     f5t: 'Лезде пайыздық баға', f5d: 'Әр сеанстан кейін жаттауыңыздың сапасын көрсететін дәл пайыздық баға аласыз.',
-    f6t: 'Таңдаулылар және соңғы оқу', f6d: 'Сүйікті сүрелерді сақтаңыз және соңғы оқыған жеріңізді бақылаңыз — қосымша орыныңызды әрдайым есте сақтайды.',
-    screensTag: 'Скриншоттар',
-    screensTitle: 'Надимді ішінен көріңіз',
-    screensSub: 'Бірегей Құрандық тәжірибе үшін мұқият жасалған келісті және қолдануға оңай интерфейс',
+    f6t: 'Таңдаулылар және соңғы оқу', f6d: 'Сүйікті сүрелерді сақтаңыз және соңғы оқыған жеріңізді бақылаңыз.',
+    screensTag: 'Скриншоттар', screensTitle: 'Надимді ішінен көріңіз',
+    screensSub: 'Бірегей Құрандық тәжірибе үшін мұқият жасалған интерфейс',
     screen1t: 'Оқу режимі', screen1d: 'Нағыз Осман жазуындағы Құран мәтіні',
     screen2t: 'Басты экран', screen2d: 'Толық сүре тізімі',
     screen3t: 'Сынақ режимі', screen3d: 'Кез-келген диапазонда өзіңізді тексеріңіз',
-    donateTag: 'Жобаны қолдау',
-    donateSectionTitle: 'Надимнің жалғасуына көмектесіңіз',
-    donateSectionSub: 'Сіздің қайырымдылығыңыз қосымшаны дамытуға және Құран жаттаушыларға қызмет ету үшін жаңа мүмкіндіктер қосуға көмектеседі',
-    contactTag: 'Бізбен байланыс',
-    contactTitle: 'Сізден хабар алуды қуанышпен күтеміз',
-    contactSub: 'Кез-келген сұрақ, ұсыныс немесе техникалық мәселе үшін — командамыз көмектесуге дайын',
-    formName: 'Аты', formNamePh: 'Сіздің атыңыз',
-    formEmail: 'Электрондық пошта',
+    donateTag: 'Жобаны қолдау', donateSectionTitle: 'Надимнің жалғасуына көмектесіңіз',
+    donateSectionSub: 'Сіздің қайырымдылығыңыз қосымшаны дамытуға және жаңа мүмкіндіктер қосуға көмектеседі',
+    contactTag: 'Байланыс', contactTitle: 'Сізден хабар алуды қуанышпен күтеміз',
+    contactSub: 'Кез-келген сұрақ, ұсыныс немесе техникалық мәселе үшін — командамыз дайын',
+    formName: 'Аты', formNamePh: 'Сіздің атыңыз', formEmail: 'Электрондық пошта',
     formSubject: 'Тақырып', formSubjectPh: 'Хабарыңыздың тақырыбы',
     formMessage: 'Хабар', formMessagePh: 'Хабарыңызды осында жазыңыз...',
-    formSubmit: 'Хабар жіберу ✦',
-    formSending: '⏳ Жіберілуде...',
-    formSuccess: '✅ Сәтті жіберілді!',
-    formError: '❌ Жіберу сәтсіз аяқталды, қайта көріңіз',
+    formSubmit: 'Хабар жіберу ✦', formSending: '⏳ Жіберілуде...',
+    formSuccess: '✅ Сәтті жіберілді!', formError: '❌ Жіберу сәтсіз аяқталды, қайта көріңіз',
     footerCopy: '© 2026 Надим — Барлық құқықтар қорғалған',
   },
-
   ms: {
     dir: 'ltr', lang: 'ms',
     appName: 'Nadeem',
-    nav_features: 'Ciri-ciri',
-    nav_screenshots: 'Tangkap Skrin',
-    nav_donate: 'Derma',
-    nav_contact: 'Hubungi Kami',
-    nav_privacy: 'Privasi',
-    nav_home: 'Laman Utama',
-    nav_terms: 'Terma Penggunaan',
-    heroEyebrow: 'Aplikasi Hafazan Al-Quran',
-    ayahRef: 'Surah Al-Muzzammil — Ayat 4',
-    heroDesc: 'Rakan bijak anda dalam muraja\'ah dan menghafaz Al-Quran — mendengar bacaan anda dan membetulkan kesilapan secara serta-merta dengan teknologi kecerdasan buatan.',
-    downloadBtn: '⬇️ Muat Turun Aplikasi',
-    discoverBtn: 'Terokai Ciri-ciri',
+    nav_features: 'Ciri-ciri', nav_screenshots: 'Tangkap Skrin', nav_donate: 'Derma',
+    nav_contact: 'Hubungi Kami', nav_privacy: 'Privasi', nav_home: 'Laman Utama', nav_terms: 'Terma Penggunaan',
+    heroEyebrow: "Aplikasi Hafazan Al-Quran", ayahRef: 'Surah Al-Muzzammil — Ayat 4',
+    heroDesc: "Rakan bijak Anda dalam murajaah dan menghafaz Al-Quran — mendengar bacaan Anda dan membetulkan kesilapan serta-merta dengan AI.",
+    downloadBtn: '⬇️ Muat Turun Aplikasi', discoverBtn: 'Terokai Ciri-ciri',
     donateTitle: 'Sokong Projek Ini',
-    donateDesc: 'Nadeem adalah aplikasi percuma sepenuhnya untuk berkhidmat kepada Al-Quran dan para penghafalnya. Jika anda mendapatinya bermanfaat, bantu ia terus berjalan — setiap derma walau sekecil manapun menyumbang kepada pengembangannya.',
-    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ',
-    hadithRef: 'Riwayat Muslim',
-    payCard: 'Bayar dengan Kad',
-    donateNote: 'Visa: pautan selamat • Bankak: pindah terus ke nombor di atas',
+    donateDesc: "Nadeem adalah aplikasi percuma sepenuhnya untuk berkhidmat kepada Al-Quran. Jika bermanfaat, bantu ia terus berjalan.",
+    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ', hadithRef: 'Riwayat Muslim',
+    payCard: 'Bayar dengan Kad', payCrypto: 'Kripto',
+    donateNote: 'Visa: pautan selamat • Bankak: pindah ke nombor di atas',
+    donateNoteIntl: 'Kad: pautan selamat • Kripto: BTC, ETH & lagi',
     statSuras: 'Surah', statPages: 'Halaman', statModes: 'Mod Hafazan', statVerses: 'Ayat',
-    featuresTag: 'Ciri-ciri',
-    featuresTitle: 'Semua yang Anda Perlukan untuk Muraja\'ah',
-    featuresSub: 'Alat pintar yang direka untuk membantu anda menguasai hafazan Al-Quran',
-    f1t: 'Bacaan Al-Quran Lengkap', f1d: 'Baca keseluruhan Al-Quran dengan tulisan Uthmani asli — 114 surah dan 604 halaman dengan navigasi yang lancar dan indah.',
-    f2t: 'Hafazan Berkuasa AI', f2d: 'Bercakap dan aplikasi membetulkan serta-merta — perkataan betul berwarna hijau dan kesilapan berwarna merah, seketika.',
-    f3t: 'Mod Ujian Pintar', f3d: 'Memilih ayat rawak, memainkan suaranya, kemudian meminta anda meneruskan — uji diri anda dalam mana-mana bahagian.',
-    f4t: 'Sistem Petunjuk', f4d: 'Lupa ayat seterusnya? Ketuk petunjuk dan ia mendedahkan sepuluh perkataan seterusnya tanpa meninggalkan mod hafazan.',
-    f5t: 'Skor Peratusan Segera', f5d: 'Selepas setiap sesi anda menerima gred peratusan tepat yang mencerminkan kualiti hafazan anda.',
-    f6t: 'Kegemaran & Bacaan Terakhir', f6d: 'Simpan surah kegemaran dan jejak di mana anda berhenti — aplikasi sentiasa mengingati tempat anda.',
-    screensTag: 'Tangkap Skrin',
-    screensTitle: 'Lihat Nadeem Dari Dalam',
-    screensSub: 'Antara muka elegan dan mudah digunakan yang direka dengan teliti untuk pengalaman Qurani yang unik',
+    featuresTag: 'Ciri-ciri', featuresTitle: "Semua yang Anda Perlukan untuk Muraja'ah",
+    featuresSub: 'Alat pintar yang direka untuk membantu Anda menguasai hafazan Al-Quran',
+    f1t: 'Bacaan Al-Quran Lengkap', f1d: 'Baca keseluruhan Al-Quran dengan tulisan Uthmani asli — 114 surah dan 604 halaman.',
+    f2t: 'Hafazan Berkuasa AI', f2d: 'Bercakap dan aplikasi membetulkan serta-merta — perkataan betul hijau, kesilapan merah.',
+    f3t: 'Mod Ujian Pintar', f3d: 'Memilih ayat rawak, memainkan suaranya, kemudian meminta Anda meneruskan.',
+    f4t: 'Sistem Petunjuk', f4d: 'Lupa ayat seterusnya? Ketuk petunjuk dan ia mendedahkan sepuluh perkataan seterusnya.',
+    f5t: 'Skor Peratusan Segera', f5d: 'Selepas setiap sesi Anda menerima gred peratusan tepat.',
+    f6t: 'Kegemaran & Bacaan Terakhir', f6d: 'Simpan surah kegemaran dan jejak di mana Anda berhenti.',
+    screensTag: 'Tangkap Skrin', screensTitle: 'Lihat Nadeem Dari Dalam',
+    screensSub: 'Antara muka elegan yang direka dengan teliti untuk pengalaman Qurani yang unik',
     screen1t: 'Mod Membaca', screen1d: 'Teks Quran dalam tulisan Uthmani asli',
     screen2t: 'Skrin Utama', screen2d: 'Senarai surah lengkap',
     screen3t: 'Mod Peperiksaan', screen3d: 'Uji diri dalam mana-mana julat',
-    donateTag: 'Sokong Projek',
-    donateSectionTitle: 'Bantu Kesinambungan Nadeem',
-    donateSectionSub: 'Derma anda membantu membangunkan aplikasi dan menambah ciri baharu untuk berkhidmat kepada penghafaz Al-Quran',
-    contactTag: 'Hubungi Kami',
-    contactTitle: 'Kami Gembira Mendengar dari Anda',
+    donateTag: 'Sokong Projek', donateSectionTitle: 'Bantu Kesinambungan Nadeem',
+    donateSectionSub: 'Derma Anda membantu membangunkan aplikasi dan menambah ciri baharu untuk penghafaz Al-Quran',
+    contactTag: 'Hubungi Kami', contactTitle: 'Kami Gembira Mendengar dari Anda',
     contactSub: 'Untuk sebarang pertanyaan, cadangan atau masalah teknikal — pasukan kami sedia membantu',
-    formName: 'Nama', formNamePh: 'Nama anda',
-    formEmail: 'E-mel',
+    formName: 'Nama', formNamePh: 'Nama anda', formEmail: 'E-mel',
     formSubject: 'Subjek', formSubjectPh: 'Subjek mesej anda',
     formMessage: 'Mesej', formMessagePh: 'Tulis mesej anda di sini...',
-    formSubmit: 'Hantar Mesej ✦',
-    formSending: '⏳ Menghantar...',
-    formSuccess: '✅ Berjaya dihantar!',
-    formError: '❌ Gagal dihantar, cuba lagi',
+    formSubmit: 'Hantar Mesej ✦', formSending: '⏳ Menghantar...',
+    formSuccess: '✅ Berjaya dihantar!', formError: '❌ Gagal dihantar, cuba lagi',
     footerCopy: '© 2026 Nadeem — Hak cipta terpelihara',
   },
-
   ru: {
     dir: 'ltr', lang: 'ru',
     appName: 'Надим',
-    nav_features: 'Возможности',
-    nav_screenshots: 'Скриншоты',
-    nav_donate: 'Пожертвовать',
-    nav_contact: 'Связаться',
-    nav_privacy: 'Конфиденциальность',
-    nav_home: 'Главная',
-    nav_terms: 'Условия использования',
-    heroEyebrow: 'Приложение для заучивания Корана',
-    ayahRef: 'Сура Аль-Муззаммиль — аят 4',
-    heroDesc: 'Ваш умный помощник в повторении и заучивании Священного Корана — слушает ваше чтение и исправляет ошибки мгновенно с помощью технологии искусственного интеллекта.',
-    downloadBtn: '⬇️ Скачать приложение',
-    discoverBtn: 'Открыть возможности',
+    nav_features: 'Возможности', nav_screenshots: 'Скриншоты', nav_donate: 'Пожертвовать',
+    nav_contact: 'Связаться', nav_privacy: 'Конфиденциальность', nav_home: 'Главная', nav_terms: 'Условия',
+    heroEyebrow: 'Приложение для заучивания Корана', ayahRef: 'Сура Аль-Муззаммиль — аят 4',
+    heroDesc: 'Ваш умный помощник в повторении и заучивании Священного Корана — слушает ваше чтение и исправляет ошибки мгновенно с помощью ИИ.',
+    downloadBtn: '⬇️ Скачать приложение', discoverBtn: 'Открыть возможности',
     donateTitle: 'Поддержите проект',
-    donateDesc: 'Надим — полностью бесплатное приложение для служения Священному Корану и тем, кто его заучивает. Если вы нашли его полезным, помогите ему продолжаться — каждое пожертвование, каким бы малым оно ни было, способствует его развитию.',
-    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ',
-    hadithRef: 'Хадис от Муслима',
-    payCard: 'Оплатить картой',
-    donateNote: 'Visa: безопасная ссылка • Bankak: перевод напрямую на номер выше',
+    donateDesc: 'Надим — полностью бесплатное приложение для служения Священному Корану. Если нашли его полезным, помогите ему продолжаться.',
+    hadithText: 'مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ', hadithRef: 'Хадис от Муслима',
+    payCard: 'Оплатить картой', payCrypto: 'Крипто',
+    donateNote: 'Visa: безопасная ссылка • Bankak: перевод на номер выше',
+    donateNoteIntl: 'Карта: безопасная ссылка • Крипто: BTC, ETH и другие',
     statSuras: 'Суры', statPages: 'Страниц', statModes: 'Режима чтения', statVerses: 'Аятов',
-    featuresTag: 'Возможности',
-    featuresTitle: 'Всё необходимое для повторения заученного',
-    featuresSub: 'Умные инструменты, разработанные для совершенствования заучивания Священного Корана',
-    f1t: 'Полное чтение Корана', f1d: 'Читайте весь Священный Коран в подлинном шрифте Усмани — 114 сур и 604 страницы с плавной и красивой навигацией.',
-    f2t: 'Чтение с ИИ', f2d: 'Говорите, и приложение немедленно исправляет — правильные слова зелёным, ошибки красным, мгновенно.',
-    f3t: 'Умный режим тестирования', f3d: 'Выбирает случайный аят, воспроизводит его звук, затем просит вас продолжить — проверьте себя в любом разделе.',
-    f4t: 'Система подсказок', f4d: 'Забыли следующий аят? Нажмите на подсказку — она откроет следующие десять слов, не выходя из режима чтения.',
-    f5t: 'Мгновенная процентная оценка', f5d: 'После каждой сессии вы получаете точную процентную оценку, отражающую качество вашего заучивания.',
-    f6t: 'Избранное и последнее чтение', f6d: 'Сохраняйте любимые суры и отслеживайте, где остановились — приложение всегда помнит ваше место.',
-    screensTag: 'Скриншоты',
-    screensTitle: 'Увидьте Надим изнутри',
-    screensSub: 'Элегантный и удобный интерфейс, тщательно разработанный для уникального коранического опыта',
+    featuresTag: 'Возможности', featuresTitle: 'Всё необходимое для повторения заученного',
+    featuresSub: 'Умные инструменты для совершенствования заучивания Священного Корана',
+    f1t: 'Полное чтение Корана', f1d: 'Читайте весь Коран в подлинном шрифте Усмани — 114 сур и 604 страницы.',
+    f2t: 'Чтение с ИИ', f2d: 'Говорите, и приложение немедленно исправляет — правильные слова зелёным, ошибки красным.',
+    f3t: 'Умный режим тестирования', f3d: 'Выбирает случайный аят, воспроизводит его, затем просит вас продолжить.',
+    f4t: 'Система подсказок', f4d: 'Забыли следующий аят? Нажмите на подсказку — она откроет следующие десять слов.',
+    f5t: 'Мгновенная процентная оценка', f5d: 'После каждой сессии вы получаете точную процентную оценку.',
+    f6t: 'Избранное и последнее чтение', f6d: 'Сохраняйте любимые суры и отслеживайте, где остановились.',
+    screensTag: 'Скриншоты', screensTitle: 'Увидьте Надим изнутри',
+    screensSub: 'Элегантный и удобный интерфейс для уникального коранического опыта',
     screen1t: 'Режим чтения', screen1d: 'Текст Корана в подлинном шрифте Усмани',
     screen2t: 'Главный экран', screen2d: 'Полный список сур',
     screen3t: 'Режим экзамена', screen3d: 'Проверьте себя в любом диапазоне',
-    donateTag: 'Поддержать проект',
-    donateSectionTitle: 'Помогите Надиму продолжаться',
-    donateSectionSub: 'Ваше пожертвование помогает разрабатывать приложение и добавлять новые функции для служения заучивающим Коран',
-    contactTag: 'Связаться с нами',
-    contactTitle: 'Мы рады услышать вас',
-    contactSub: 'По любым вопросам, предложениям или техническим проблемам — наша команда здесь, чтобы помочь',
-    formName: 'Имя', formNamePh: 'Ваше имя',
-    formEmail: 'Электронная почта',
+    donateTag: 'Поддержать проект', donateSectionTitle: 'Помогите Надиму продолжаться',
+    donateSectionSub: 'Ваше пожертвование помогает разрабатывать приложение и добавлять новые функции',
+    contactTag: 'Связаться с нами', contactTitle: 'Мы рады услышать вас',
+    contactSub: 'По любым вопросам, предложениям или техническим проблемам — наша команда здесь',
+    formName: 'Имя', formNamePh: 'Ваше имя', formEmail: 'Электронная почта',
     formSubject: 'Тема', formSubjectPh: 'Тема вашего сообщения',
     formMessage: 'Сообщение', formMessagePh: 'Напишите ваше сообщение здесь...',
-    formSubmit: 'Отправить сообщение ✦',
-    formSending: '⏳ Отправляется...',
-    formSuccess: '✅ Успешно отправлено!',
-    formError: '❌ Ошибка отправки, попробуйте снова',
+    formSubmit: 'Отправить сообщение ✦', formSending: '⏳ Отправляется...',
+    formSuccess: '✅ Успешно отправлено!', formError: '❌ Ошибка отправки, попробуйте снова',
     footerCopy: '© 2026 Надим — Все права защищены',
   }
 };
+
+// =============================================
+// PILL MENU TOGGLE
+// =============================================
+function toggleLangMenu() {
+  const wrap = document.getElementById('langPillWrap');
+  const btn = document.getElementById('langPillBtn');
+  const isOpen = wrap.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
+}
+
+function selectLang(lang) {
+  const wrap = document.getElementById('langPillWrap');
+  wrap.classList.remove('open');
+  document.getElementById('langPillBtn').setAttribute('aria-expanded', 'false');
+  setLang(lang);
+}
+
+// Close on outside click
+document.addEventListener('click', (e) => {
+  const wrap = document.getElementById('langPillWrap');
+  if (!wrap.contains(e.target)) wrap.classList.remove('open');
+});
 
 // =============================================
 // LANGUAGE SWITCH ENGINE
@@ -830,11 +910,9 @@ function setLang(lang) {
   if (!t) return;
   currentLang = lang;
 
-  // Update html dir + lang
+  // Update html
   document.documentElement.dir = t.dir;
   document.documentElement.lang = t.lang;
-
-  // Update body class
   document.body.classList.remove('ltr', 'rtl');
   document.body.classList.add(t.dir === 'rtl' ? 'rtl' : 'ltr');
 
@@ -850,23 +928,31 @@ function setLang(lang) {
     if (t[key] !== undefined) el.placeholder = t[key];
   });
 
-  // Update footer logo (keep the star)
+  // Footer logo
   document.querySelectorAll('[data-t="appName"]').forEach(el => {
-    if (el.classList.contains('footer-logo')) {
-      el.textContent = t.appName + ' ✦';
-    }
+    if (el.classList.contains('footer-logo')) el.textContent = t.appName + ' ✦';
   });
 
-  // Update active button
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('onclick') === `setLang('${lang}')`);
-  });
-
-  // Fix contact form text alignment for RTL/LTR
-  const form = document.querySelector('.contact-form');
-  if (form) {
-    form.style.textAlign = t.dir === 'rtl' ? 'right' : 'left';
+  // Update pill display
+  const meta = langMeta[lang];
+  if (meta) {
+    document.getElementById('pillFlag').textContent = meta.flag;
+    document.getElementById('pillName').textContent = meta.name;
   }
+
+  // Update dropdown active state
+  document.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+  });
+
+  // Show/hide payment methods based on language
+  const isArabic = lang === 'ar';
+  document.querySelectorAll('.ar-only').forEach(el => { el.style.display = isArabic ? '' : 'none'; });
+  document.querySelectorAll('.intl-only').forEach(el => { el.style.display = isArabic ? 'none' : ''; });
+
+  // Contact form alignment
+  const form = document.querySelector('.contact-form');
+  if (form) form.style.textAlign = t.dir === 'rtl' ? 'right' : 'left';
 }
 
 // =============================================
@@ -906,16 +992,9 @@ async function handleSubmit(e) {
 // =============================================
 window.addEventListener('DOMContentLoaded', () => {
   const supported = ['ar', 'en', 'tr', 'id', 'kk', 'ms', 'ru'];
-
-  // 1. Check ?lang= in URL first
   const urlParams = new URLSearchParams(window.location.search);
   const urlLang = urlParams.get('lang');
-  if (urlLang && supported.includes(urlLang)) {
-    setLang(urlLang);
-    return;
-  }
-
-  // 2. Detect browser language
+  if (urlLang && supported.includes(urlLang)) { setLang(urlLang); return; }
   const browserLang = navigator.language.slice(0, 2);
   const autoLang = supported.includes(browserLang) ? browserLang : 'ar';
   setLang(autoLang);
