@@ -29,8 +29,19 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
 .lang-pill-wrap {
   position: fixed;
   top: 14px;
-  left: 18px;
   z-index: 1100;
+  /* RTL (Arabic default): logo is on the right → pill goes LEFT */
+  left: 18px;
+  right: auto;
+}
+/* LTR languages: logo is on the left → pill goes RIGHT */
+body.ltr .lang-pill-wrap {
+  left: auto;
+  right: 18px;
+}
+body.rtl .lang-pill-wrap {
+  left: 18px;
+  right: auto;
 }
 
 .lang-pill-btn {
@@ -80,6 +91,7 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
+  right: auto;
   background: rgba(22,22,22,0.97);
   border: 1px solid rgba(201,168,76,0.25);
   border-radius: 16px;
@@ -285,14 +297,38 @@ body.ltr .hero-ayah-ref { direction: rtl; text-align: right; }
 body.ltr .hd-hadith p { direction: rtl; }
 body.ltr .donate-hadith p { direction: rtl; }
 body.ltr .contact-form { text-align: left; }
-body.ltr .lang-pill-wrap { left: 18px; right: auto; }
-body.rtl .lang-pill-wrap { left: 18px; right: auto; }
+/* LTR: pill is on the right, so dropdown opens from the right edge */
+body.ltr .lang-dropdown { left: auto; right: 0; transform-origin: top right; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .lang-pill-wrap { top: auto; bottom: 20px; left: 50%; transform: translateX(-50%); }
-  .lang-dropdown { left: 50%; transform: translateX(-50%) translateY(-6px) scale(0.97); transform-origin: bottom center; top: auto; bottom: calc(100% + 8px); }
-  .lang-pill-wrap.open .lang-dropdown { transform: translateX(-50%) translateY(0) scale(1); }
+  /* ✅ الشريط يبقى في الأعلى دائماً على الموبايل أيضاً */
+  .lang-pill-wrap {
+    top: 14px;
+    bottom: auto;
+    left: 18px;
+    right: auto;
+  }
+  body.ltr .lang-pill-wrap {
+    left: auto;
+    right: 18px;
+  }
+  .lang-dropdown {
+    left: 0;
+    right: auto;
+    transform: translateY(-6px) scale(0.97);
+    transform-origin: top left;
+    top: calc(100% + 8px);
+    bottom: auto;
+  }
+  body.ltr .lang-dropdown {
+    left: auto;
+    right: 0;
+    transform-origin: top right;
+  }
+  .lang-pill-wrap.open .lang-dropdown {
+    transform: translateY(0) scale(1);
+  }
   nav { padding: 16px 24px; }
   .nav-links { display: none; }
   .hero { grid-template-columns: 1fr; padding: 100px 28px 60px; text-align: center; }
@@ -585,9 +621,6 @@ body.rtl .lang-pill-wrap { left: 18px; right: auto; }
 </footer>
 
 <script>
-// =============================================
-// LANG DATA (flag + native name for pill)
-// =============================================
 const langMeta = {
   ar: { flag: '🇸🇦', name: 'العربية' },
   en: { flag: '🇬🇧', name: 'English' },
@@ -598,9 +631,6 @@ const langMeta = {
   ru: { flag: '🇷🇺', name: 'Русский' },
 };
 
-// =============================================
-// TRANSLATIONS
-// =============================================
 const translations = {
   ar: {
     dir: 'rtl', lang: 'ar',
@@ -877,9 +907,6 @@ const translations = {
   }
 };
 
-// =============================================
-// PILL MENU TOGGLE
-// =============================================
 function toggleLangMenu() {
   const wrap = document.getElementById('langPillWrap');
   const btn = document.getElementById('langPillBtn');
@@ -894,15 +921,11 @@ function selectLang(lang) {
   setLang(lang);
 }
 
-// Close on outside click
 document.addEventListener('click', (e) => {
   const wrap = document.getElementById('langPillWrap');
   if (!wrap.contains(e.target)) wrap.classList.remove('open');
 });
 
-// =============================================
-// LANGUAGE SWITCH ENGINE
-// =============================================
 let currentLang = 'ar';
 
 function setLang(lang) {
@@ -910,54 +933,43 @@ function setLang(lang) {
   if (!t) return;
   currentLang = lang;
 
-  // Update html
   document.documentElement.dir = t.dir;
   document.documentElement.lang = t.lang;
   document.body.classList.remove('ltr', 'rtl');
   document.body.classList.add(t.dir === 'rtl' ? 'rtl' : 'ltr');
 
-  // Update all data-t elements
   document.querySelectorAll('[data-t]').forEach(el => {
     const key = el.getAttribute('data-t');
     if (t[key] !== undefined) el.textContent = t[key];
   });
 
-  // Update placeholders
   document.querySelectorAll('[data-placeholder-t]').forEach(el => {
     const key = el.getAttribute('data-placeholder-t');
     if (t[key] !== undefined) el.placeholder = t[key];
   });
 
-  // Footer logo
   document.querySelectorAll('[data-t="appName"]').forEach(el => {
     if (el.classList.contains('footer-logo')) el.textContent = t.appName + ' ✦';
   });
 
-  // Update pill display
   const meta = langMeta[lang];
   if (meta) {
     document.getElementById('pillFlag').textContent = meta.flag;
     document.getElementById('pillName').textContent = meta.name;
   }
 
-  // Update dropdown active state
   document.querySelectorAll('.lang-opt').forEach(opt => {
     opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
   });
 
-  // Show/hide payment methods based on language
   const isArabic = lang === 'ar';
   document.querySelectorAll('.ar-only').forEach(el => { el.style.display = isArabic ? '' : 'none'; });
   document.querySelectorAll('.intl-only').forEach(el => { el.style.display = isArabic ? 'none' : ''; });
 
-  // Contact form alignment
   const form = document.querySelector('.contact-form');
   if (form) form.style.textAlign = t.dir === 'rtl' ? 'right' : 'left';
 }
 
-// =============================================
-// FORM SUBMISSION
-// =============================================
 async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -987,9 +999,6 @@ async function handleSubmit(e) {
   }
 }
 
-// =============================================
-// INIT
-// =============================================
 window.addEventListener('DOMContentLoaded', () => {
   const supported = ['ar', 'en', 'tr', 'id', 'kk', 'ms', 'ru'];
   const urlParams = new URLSearchParams(window.location.search);
